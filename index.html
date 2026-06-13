@@ -300,14 +300,14 @@
     }
 
     .doc-intro {
-      padding: var(--space-5) 0 var(--space-6);
+      padding: 28px 0 var(--space-6);
       border-bottom: 0;
     }
 
     .doc-intro-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 280px;
-      gap: var(--space-7);
+      grid-template-columns: minmax(0, 760px);
+      gap: 14px;
       align-items: start;
     }
 
@@ -328,32 +328,37 @@
     h1 {
       margin: 0;
       max-width: 760px;
-      font-size: 2.125rem;
+      font-size: 2rem;
       line-height: 1.18;
       font-weight: 780;
     }
 
     .intro-text {
-      max-width: 62ch;
-      margin: var(--space-3) 0 0;
+      max-width: 48ch;
+      margin: 10px 0 0;
       color: var(--ink-2);
       font-size: var(--text-md);
-      line-height: 1.65;
+      line-height: 1.58;
     }
 
-    .value-line {
-      border-top: 0;
-      padding-top: 4px;
-      color: var(--ink-2);
+    .intro-chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      color: var(--muted);
       font-size: var(--text-sm);
-      line-height: 1.65;
+      line-height: 1.45;
     }
 
-    .value-line strong {
-      display: block;
+    .intro-chain strong {
       color: var(--ink);
-      font-size: var(--text-sm);
-      margin-bottom: 7px;
+      font-weight: 680;
+    }
+
+    .intro-chain span {
+      color: var(--faint);
     }
 
     section {
@@ -1522,15 +1527,14 @@
       <header class="doc-intro">
         <div class="doc-intro-grid">
           <div>
-            <p class="eyebrow">实用型交互设计问题判别工具</p>
+            <p class="eyebrow">交互设计问题判别工具</p>
             <h1>把“小优化”翻译成设计能力。</h1>
             <p class="intro-text">
-              看到页面乱、流程长、按钮弱、提示缺失、规则说不清时，先判断用户卡点，再把优化动作沉淀成可复盘、可表达的交互设计能力。
+              先定位用户卡点，再把具体改动归类成可复盘、可表达的能力证据。
             </p>
-          </div>
-          <div class="value-line">
-            <strong>核心价值</strong>
-            把“零散的小优化”翻译成“可复盘、可表达、可沉淀的交互设计能力”。
+            <div class="intro-chain" aria-label="诊断顺序">
+              <strong>现象</strong><span>→</span><strong>卡点</strong><span>→</span><strong>能力</strong><span>→</span><strong>动作</strong><span>→</span><strong>表达</strong>
+            </div>
           </div>
         </div>
       </header>
