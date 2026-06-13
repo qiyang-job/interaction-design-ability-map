@@ -467,6 +467,215 @@
       align-items: start;
     }
 
+    .translator {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .translator-panel,
+    .translator-result {
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+      min-width: 0;
+    }
+
+    .translator-head {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-2);
+    }
+
+    .translator-head h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .translator-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .form-stack {
+      display: grid;
+    }
+
+    .form-row {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .form-row label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-weight: 680;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .form-row textarea {
+      display: block;
+      width: 100%;
+      min-height: 84px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--ink);
+      padding: 11px 12px;
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .form-row textarea:focus {
+      border-color: var(--focus);
+      outline: 2px solid var(--focus);
+      outline-offset: 1px;
+    }
+
+    .hint {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .choice-button,
+    .example-button,
+    .action-button {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--ink-2);
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
+
+    .choice-button {
+      min-height: 42px;
+      padding: 9px 10px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .choice-button:hover,
+    .choice-button.active,
+    .example-button:hover,
+    .action-button:hover {
+      background: var(--accent-soft);
+      border-color: var(--focus);
+      color: var(--ink);
+    }
+
+    .choice-button.active {
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
+    .example-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .example-button {
+      padding: 7px 9px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .translator-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .action-button {
+      min-height: 38px;
+      padding: 8px 12px;
+      font-weight: 680;
+      font-size: 14px;
+    }
+
+    .action-button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--paper);
+    }
+
+    .action-button.primary:hover {
+      background: var(--accent-ink);
+      border-color: var(--accent-ink);
+      color: var(--paper);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .result-cell {
+      padding: 16px 18px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      min-height: 116px;
+    }
+
+    .result-cell:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .result-cell.wide {
+      grid-column: 1 / -1;
+      border-right: 0;
+    }
+
+    .result-cell p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .review-output {
+      margin: 0;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .copy-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--paper-2);
+    }
+
+    .copy-status {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     .scenario-list {
       border-top: 1px solid var(--line-strong);
       background: var(--paper);
@@ -701,6 +910,36 @@
       color: var(--accent-ink);
     }
 
+    .product-grid {
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .product-key {
+      padding: 16px 18px;
+      border-right: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 680;
+      line-height: 1.45;
+    }
+
+    .product-value {
+      padding: 16px 18px;
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .product-value strong {
+      color: var(--ink);
+    }
+
     @media (max-width: 1020px) {
       .shell {
         grid-template-columns: 1fr;
@@ -724,7 +963,8 @@
 
       .doc-intro-grid,
       section,
-      .diagnoser {
+      .diagnoser,
+      .translator {
         grid-template-columns: 1fr;
       }
 
@@ -758,10 +998,12 @@
       .stuck-row,
       .ability-row,
       .boundary-item,
+      .product-row,
       .translation-row,
       .usage-grid,
       .diagnosis-head,
       .diagnosis-flow,
+      .result-grid,
       .boundary-content,
       .ability-fields {
         grid-template-columns: 1fr;
@@ -772,8 +1014,10 @@
       .boundary-title,
       .translation-cell,
       .usage-block,
+      .product-key,
       .stuck-cell,
       .compare-block,
+      .result-cell,
       .diagnosis-field,
       .ability-field {
         border-right: 0;
@@ -786,12 +1030,14 @@
       .stuck-cell,
       .translation-cell,
       .compare-block,
+      .result-cell,
       .diagnosis-field,
       .ability-field {
         border-bottom: 1px solid var(--line);
       }
 
       .ability-field.wide,
+      .result-cell.wide,
       .compare-block.rule {
         border-bottom: 0;
       }
@@ -817,9 +1063,11 @@
         <a href="#stuck"><span class="meta">02</span><span>先问用户卡在哪里</span></a>
         <a href="#abilities"><span class="meta">03</span><span>六类底层设计能力</span></a>
         <a href="#boundaries"><span class="meta">04</span><span>易混概念边界</span></a>
-        <a href="#diagnoser"><span class="meta">05</span><span>可交互判别器</span></a>
-        <a href="#review"><span class="meta">06</span><span>项目复盘表达</span></a>
-        <a href="#usage"><span class="meta">07</span><span>使用方法</span></a>
+        <a href="#translator"><span class="meta">05</span><span>复盘表达生成器</span></a>
+        <a href="#diagnoser"><span class="meta">06</span><span>可交互判别器</span></a>
+        <a href="#review"><span class="meta">07</span><span>项目复盘表达</span></a>
+        <a href="#usage"><span class="meta">08</span><span>使用方法</span></a>
+        <a href="#product"><span class="meta">09</span><span>产品化方向</span></a>
       </nav>
 
       <div class="sidebar-note">
@@ -1185,8 +1433,82 @@
         </div>
       </section>
 
+      <section id="translator">
+        <div class="section-no">05 / Translator</div>
+        <div class="section-body">
+          <h2>复盘表达生成器：把你的真实优化翻译成专业说法。</h2>
+          <p class="lead">这是下一版的核心工作流。输入你做了什么，选择用户卡点，页面会生成一条可以放进周报、项目总结或作品集里的复盘表达。</p>
+
+          <div class="translator">
+            <div class="translator-panel">
+              <div class="translator-head">
+                <h3>输入你的优化</h3>
+                <p>不用写得漂亮，像平时复盘草稿一样写就行。</p>
+              </div>
+              <div class="form-stack">
+                <div class="form-row">
+                  <label for="changeInput">我做了什么优化</label>
+                  <textarea id="changeInput">把订单列表里的状态标签固定到标题右侧，并弱化低频字段。</textarea>
+                  <div class="hint">例：减少提交流程步骤、重排列表字段、给置灰按钮补充原因。</div>
+                </div>
+                <div class="form-row">
+                  <label for="stuckInput">用户原来卡在哪里</label>
+                  <textarea id="stuckInput">用户扫列表时很难快速判断每个订单当前处于什么状态。</textarea>
+                  <div class="hint">如果暂时说不清，可以先选择下面的卡点类型。</div>
+                </div>
+                <div class="form-row">
+                  <label>选择主要卡点</label>
+                  <div class="choice-grid" id="translatorChoices"></div>
+                </div>
+                <div class="form-row">
+                  <label>试一个常见例子</label>
+                  <div class="example-row" id="translatorExamples"></div>
+                </div>
+                <div class="translator-actions">
+                  <button class="action-button primary" type="button" id="generateStatement">生成复盘表达</button>
+                  <button class="action-button" type="button" id="resetStatement">恢复示例</button>
+                </div>
+              </div>
+            </div>
+
+            <article class="translator-result" aria-live="polite">
+              <div class="translator-head">
+                <h3>生成结果</h3>
+                <p>先看归类是否准确，再拿表达去改成你的项目语境。</p>
+              </div>
+              <div class="result-grid">
+                <div class="result-cell">
+                  <div class="field-label">主能力</div>
+                  <p id="primaryAbility">页面布局 / 视觉层级</p>
+                </div>
+                <div class="result-cell">
+                  <div class="field-label">辅助能力</div>
+                  <p id="secondaryAbility">信息架构</p>
+                </div>
+                <div class="result-cell">
+                  <div class="field-label">用户卡点</div>
+                  <p id="translatedStuck">用户扫列表时很难快速判断每个订单当前处于什么状态。</p>
+                </div>
+                <div class="result-cell">
+                  <div class="field-label">设计动作</div>
+                  <p id="translatedAction">调整信息位置、强化关键状态、统一对齐和视觉层级，降低批量扫读成本。</p>
+                </div>
+                <div class="result-cell wide">
+                  <div class="field-label">可直接使用的复盘表达</div>
+                  <p class="review-output" id="generatedReview">这个优化表面上是把订单列表里的状态标签固定到标题右侧，并弱化低频字段，但真实问题是用户扫列表时很难快速判断每个订单当前处于什么状态。我将它归为页面布局 / 视觉层级，并结合信息架构调整信息优先级，通过调整信息位置、强化关键状态、统一对齐和视觉层级，降低批量扫读成本。</p>
+                </div>
+              </div>
+              <div class="copy-row">
+                <button class="action-button" type="button" id="copyReview">复制 Markdown</button>
+                <span class="copy-status" id="copyStatus">生成后可以复制到周报、作品集或项目复盘里。</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section id="diagnoser">
-        <div class="section-no">05 / Diagnoser</div>
+        <div class="section-no">06 / Diagnoser</div>
         <div class="section-body">
           <h2>可交互判别器。</h2>
           <p class="lead">点一个常见现象，右侧会给出完整诊断链路：表层现象、用户卡点、底层能力、设计动作、复盘表达。</p>
@@ -1231,7 +1553,7 @@
       </section>
 
       <section id="review">
-        <div class="section-no">06 / Review</div>
+        <div class="section-no">07 / Review</div>
         <div class="section-body">
           <h2>项目复盘表达：把动作翻译成能力。</h2>
           <p class="lead">复盘时不要只说“我改了什么”，要补上“用户卡在哪里、我用什么设计判断解决、结果降低了什么成本”。</p>
@@ -1292,7 +1614,7 @@
       </section>
 
       <section id="usage">
-        <div class="section-no">07 / Usage</div>
+        <div class="section-no">08 / Usage</div>
         <div class="section-body">
           <h2>使用方法。</h2>
           <p class="lead">这张图真正的用法，是让你在工作当下和项目复盘时都能稳定套用同一条判断链。</p>
@@ -1320,6 +1642,37 @@
 
           <div class="mantra">
             <strong>记忆口诀：</strong>流程看路，信息看分，布局看摆，操作看做，状态看反馈，规则看条件。
+          </div>
+        </div>
+      </section>
+
+      <section id="product">
+        <div class="section-no">09 / Product</div>
+        <div class="section-body">
+          <h2>产品化方向：从方法页到复盘工作台。</h2>
+          <p class="lead">这个工具不适合做成百科。它更适合继续收敛为一个小而锋利的工作台：让设计师把真实项目里的细节优化沉淀成能力证据。</p>
+
+          <div class="product-grid">
+            <div class="product-row">
+              <div class="product-key">目标用户</div>
+              <div class="product-value">初中级交互设计师、产品设计师，以及正在准备作品集、述职、晋升材料的人。</div>
+            </div>
+            <div class="product-row">
+              <div class="product-key">核心痛点</div>
+              <div class="product-value"><strong>设计劳动不可见。</strong>很多细节优化有真实判断，但复盘时只剩“我改了页面、调了按钮、加了提示”。</div>
+            </div>
+            <div class="product-row">
+              <div class="product-key">当前解决度</div>
+              <div class="product-value">已解决“怎么判别”和“怎么表达”的基础问题；还没解决“保存真实案例、持续沉淀、按项目输出”的长期工作流。</div>
+            </div>
+            <div class="product-row">
+              <div class="product-key">下一版重点</div>
+              <div class="product-value">把生成器升级为“案例沉淀器”：每次优化都能保存为一条能力证据，支持复制、导出 Markdown、按能力分类回顾。</div>
+            </div>
+            <div class="product-row">
+              <div class="product-key">不做什么</div>
+              <div class="product-value">不追求覆盖所有交互设计理论，不做营销型知识库，不把页面堆成课程大纲。只服务一个动作：把小优化翻译成能力证据。</div>
+            </div>
           </div>
         </div>
       </section>
@@ -1485,6 +1838,204 @@
     scenarios.forEach((item, index) => {
       list.appendChild(createScenarioButton(item, index));
     });
+
+    const abilityProfiles = {
+      path: {
+        label: "路径卡住",
+        primary: "流程路径设计",
+        secondary: "操作控件设计",
+        action: "压缩低价值步骤、减少跨页跳转、前置关键判断，并补充中断后的返回路径。",
+        cost: "降低任务完成路径成本",
+        fallbackStuck: "用户完成任务时路径过长，需要反复跳转和确认。"
+      },
+      understanding: {
+        label: "理解卡住",
+        primary: "信息架构",
+        secondary: "页面布局 / 视觉层级",
+        action: "重组信息分组、调整主次顺序、统一命名，并把关键判断信息前置。",
+        cost: "降低理解成本和判断成本",
+        fallbackStuck: "用户看得到信息，但无法快速理解信息之间的关系和优先级。"
+      },
+      scanning: {
+        label: "扫读卡住",
+        primary: "页面布局 / 视觉层级",
+        secondary: "信息架构",
+        action: "调整信息位置、强化关键状态、统一对齐和视觉层级，降低批量扫读成本。",
+        cost: "提升扫读效率",
+        fallbackStuck: "用户需要反复阅读页面或列表，才能判断重点和差异。"
+      },
+      action: {
+        label: "操作卡住",
+        primary: "操作控件设计",
+        secondary: "流程路径设计",
+        action: "重排主次操作、前置高频入口、收纳低频动作，并为高风险操作补充确认或撤销机制。",
+        cost: "降低寻找成本和误操作风险",
+        fallbackStuck: "用户知道自己想做什么，但不知道应该点哪里、怎么选或怎么确认。"
+      },
+      feedback: {
+        label: "反馈卡住",
+        primary: "状态反馈",
+        secondary: "规则逻辑",
+        action: "补齐加载、成功、失败、禁用和异常状态，并说明结果、原因和下一步动作。",
+        cost: "提升用户对系统结果的确定感",
+        fallbackStuck: "用户操作后不知道系统有没有收到，也不知道失败原因和下一步。"
+      },
+      rule: {
+        label: "规则卡住",
+        primary: "规则逻辑",
+        secondary: "状态反馈",
+        action: "梳理角色、权限、对象状态和业务条件下的可见可用规则，并解释限制原因。",
+        cost: "减少用户对业务规则的猜测",
+        fallbackStuck: "用户不知道当前限制来自权限、状态、业务条件还是数据问题。"
+      }
+    };
+
+    const translatorExamples = [
+      {
+        label: "列表扫读慢",
+        type: "scanning",
+        change: "把订单列表里的状态标签固定到标题右侧，并弱化低频字段。",
+        stuck: "用户扫列表时很难快速判断每个订单当前处于什么状态。"
+      },
+      {
+        label: "流程太绕",
+        type: "path",
+        change: "把原来 4 步提交压缩成 2 步，并把关键校验前置。",
+        stuck: "用户提交时需要多次跳转和重复确认，任务中途容易断。"
+      },
+      {
+        label: "置灰无原因",
+        type: "rule",
+        change: "给不可提交按钮增加置灰原因和充值后的恢复路径。",
+        stuck: "用户不知道为什么当前不能提交，也不知道下一步该怎么处理。"
+      },
+      {
+        label: "按钮找不到",
+        type: "action",
+        change: "把高频的提交入口前置到页面底部固定操作区，并收纳低频动作。",
+        stuck: "用户知道要提交，但在页面里找不到明确的主操作入口。"
+      }
+    ];
+
+    const translatorState = {
+      type: "scanning"
+    };
+
+    const translatorEls = {
+      choices: document.getElementById("translatorChoices"),
+      examples: document.getElementById("translatorExamples"),
+      change: document.getElementById("changeInput"),
+      stuck: document.getElementById("stuckInput"),
+      generate: document.getElementById("generateStatement"),
+      reset: document.getElementById("resetStatement"),
+      copy: document.getElementById("copyReview"),
+      copyStatus: document.getElementById("copyStatus"),
+      primary: document.getElementById("primaryAbility"),
+      secondary: document.getElementById("secondaryAbility"),
+      translatedStuck: document.getElementById("translatedStuck"),
+      translatedAction: document.getElementById("translatedAction"),
+      review: document.getElementById("generatedReview")
+    };
+
+    function cleanSentence(value, fallback) {
+      const text = value.trim().replace(/\s+/g, " ").replace(/[。.!！；;，,、\s]+$/g, "");
+      return text || fallback;
+    }
+
+    function cleanPhrase(value) {
+      return value.trim().replace(/[。.!！；;\s]+$/g, "");
+    }
+
+    function buildReviewText() {
+      const profile = abilityProfiles[translatorState.type];
+      const change = cleanSentence(translatorEls.change.value, "对现有体验做了一次细节优化");
+      const stuck = cleanSentence(translatorEls.stuck.value, profile.fallbackStuck);
+      const action = cleanPhrase(profile.action);
+      return `这个优化表面上是${change}，但真实问题是${stuck}。我将它归为${profile.primary}，并结合${profile.secondary}处理相关边界，通过${action}，${profile.cost}。`;
+    }
+
+    function renderTranslator() {
+      const profile = abilityProfiles[translatorState.type];
+      const stuck = cleanSentence(translatorEls.stuck.value, profile.fallbackStuck);
+      translatorEls.primary.textContent = profile.primary;
+      translatorEls.secondary.textContent = profile.secondary;
+      translatorEls.translatedStuck.textContent = stuck;
+      translatorEls.translatedAction.textContent = profile.action;
+      translatorEls.review.textContent = buildReviewText();
+      translatorEls.copyStatus.textContent = "生成后可以复制到周报、作品集或项目复盘里。";
+
+      document.querySelectorAll(".choice-button").forEach((button) => {
+        const isActive = button.dataset.type === translatorState.type;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+    }
+
+    function applyTranslatorExample(example) {
+      translatorState.type = example.type;
+      translatorEls.change.value = example.change;
+      translatorEls.stuck.value = example.stuck;
+      renderTranslator();
+    }
+
+    Object.entries(abilityProfiles).forEach(([type, profile]) => {
+      const button = document.createElement("button");
+      button.className = "choice-button" + (type === translatorState.type ? " active" : "");
+      button.type = "button";
+      button.dataset.type = type;
+      button.setAttribute("aria-pressed", String(type === translatorState.type));
+      button.textContent = `${profile.label} / ${profile.primary}`;
+      button.addEventListener("click", () => {
+        translatorState.type = type;
+        renderTranslator();
+      });
+      translatorEls.choices.appendChild(button);
+    });
+
+    translatorExamples.forEach((example, index) => {
+      const button = document.createElement("button");
+      button.className = "example-button";
+      button.type = "button";
+      button.dataset.exampleIndex = String(index);
+      button.textContent = example.label;
+      button.addEventListener("click", () => applyTranslatorExample(example));
+      translatorEls.examples.appendChild(button);
+    });
+
+    translatorEls.generate.addEventListener("click", renderTranslator);
+    translatorEls.reset.addEventListener("click", () => applyTranslatorExample(translatorExamples[0]));
+
+    translatorEls.copy.addEventListener("click", async () => {
+      const profile = abilityProfiles[translatorState.type];
+      const markdown = [
+        `**主能力：**${profile.primary}`,
+        `**辅助能力：**${profile.secondary}`,
+        `**用户卡点：**${translatorEls.translatedStuck.textContent}`,
+        `**设计动作：**${translatorEls.translatedAction.textContent}`,
+        `**复盘表达：**${translatorEls.review.textContent}`
+      ].join("\n");
+
+      try {
+        if (!navigator.clipboard) throw new Error("Clipboard API unavailable");
+        await navigator.clipboard.writeText(markdown);
+        translatorEls.copyStatus.textContent = "已复制，可直接粘贴到复盘文档。";
+      } catch (error) {
+        const textarea = document.createElement("textarea");
+        textarea.value = markdown;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(textarea);
+        translatorEls.copyStatus.textContent = copied
+          ? "已复制，可直接粘贴到复盘文档。"
+          : "当前浏览器不允许自动复制，请手动选中文案复制。";
+      }
+    });
+
+    renderTranslator();
 
     const navLinks = Array.from(document.querySelectorAll(".nav a"));
     const sections = navLinks
