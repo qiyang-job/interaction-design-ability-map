@@ -99,27 +99,25 @@
 
     .sidebar-toggle {
       appearance: none;
-      width: 100%;
-      min-height: 36px;
-      display: flex;
+      width: 28px;
+      min-height: 28px;
+      display: inline-grid;
       align-items: center;
-      justify-content: space-between;
-      gap: var(--space-2);
-      margin: 0 0 14px;
-      padding: 0 10px;
+      justify-content: center;
+      place-items: center;
+      flex: 0 0 28px;
+      margin: 0;
+      padding: 0;
       border: 1px solid transparent;
       border-radius: var(--radius);
-      background: var(--paper-2);
+      background: transparent;
       color: var(--ink-2);
       cursor: pointer;
-      text-align: left;
-      font-size: var(--text-sm);
-      font-weight: 680;
     }
 
     .sidebar-toggle:hover {
-      background: var(--accent-soft);
-      border-color: var(--line-strong);
+      background: var(--paper-2);
+      border-color: var(--line);
       color: var(--ink);
     }
 
@@ -141,10 +139,13 @@
 
     .shell.is-collapsed .sidebar-toggle {
       justify-content: center;
-      padding-inline: 0;
+      width: 36px;
+      min-height: 36px;
+      border-color: var(--line);
+      background: var(--paper-2);
     }
 
-    .shell.is-collapsed .toggle-label {
+    .toggle-label {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -154,11 +155,14 @@
     }
 
     .brand {
-      padding: 2px 4px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-2);
+      padding: 2px 4px 12px;
       border-bottom: 0;
     }
 
-    .brand-label,
     .section-no,
     .meta,
     .field-label,
@@ -177,9 +181,19 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      color: var(--accent-ink);
+      color: var(--ink-2);
+      font-size: var(--text-sm);
+      font-weight: 680;
+      line-height: 1.35;
       min-height: 28px;
       margin-bottom: 0;
+      min-width: 0;
+    }
+
+    .brand-label-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .nav {
@@ -247,7 +261,10 @@
     }
 
     .shell.is-collapsed .brand {
-      padding-bottom: 10px;
+      display: grid;
+      justify-items: center;
+      gap: var(--space-2);
+      padding: 0 0 10px;
     }
 
     .shell.is-collapsed .brand-label-text,
@@ -262,15 +279,7 @@
     }
 
     .shell.is-collapsed .brand-label {
-      display: grid;
-      place-items: center;
-      width: 36px;
-      height: 36px;
-      margin: 0 auto;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper-2);
-      color: var(--accent-ink);
+      display: none;
     }
 
     .shell.is-collapsed .nav {
@@ -309,13 +318,6 @@
       grid-template-columns: minmax(0, 760px);
       gap: 14px;
       align-items: start;
-    }
-
-    .eyebrow {
-      margin: 0 0 var(--space-2);
-      color: var(--accent-ink);
-      font-size: var(--text-sm);
-      font-weight: 650;
     }
 
     h1,
@@ -1318,18 +1320,25 @@
       }
 
       .sidebar-toggle {
-        width: auto;
-        min-width: 128px;
-        margin-bottom: var(--space-3);
+        width: 28px;
+        min-width: 0;
+        margin-bottom: 0;
       }
 
       .brand {
         padding-bottom: var(--space-3);
       }
 
+      .shell.is-collapsed .brand {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--space-2);
+        padding: 2px 4px var(--space-3);
+      }
+
       .shell.is-collapsed .brand-label,
-      .shell.is-collapsed .brand-label-text,
-      .shell.is-collapsed .toggle-label {
+      .shell.is-collapsed .brand-label-text {
         position: static;
         width: auto;
         height: auto;
@@ -1340,7 +1349,7 @@
 
       .shell.is-collapsed .brand-label {
         display: inline-flex;
-        margin: 0 0 var(--space-2);
+        margin: 0;
         border: 0;
         border-radius: 0;
         background: transparent;
@@ -1351,8 +1360,12 @@
       }
 
       .shell.is-collapsed .sidebar-toggle {
-        justify-content: space-between;
-        padding: var(--space-2) var(--space-3);
+        width: 28px;
+        min-height: 28px;
+        border-color: transparent;
+        background: transparent;
+        justify-content: center;
+        padding: 0;
       }
 
       .nav {
@@ -1499,12 +1512,12 @@
 <body>
   <div class="shell" id="appShell">
     <aside class="sidebar" id="sidebar">
-      <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-controls="sidebarBody" aria-expanded="true">
-        <span class="toggle-label">收起目录</span>
-        <span class="toggle-icon" aria-hidden="true"><i data-lucide="panel-left-close" class="button-icon"></i></span>
-      </button>
       <div class="brand">
-        <div class="brand-label"><i data-lucide="book-open" class="title-icon" aria-hidden="true"></i><span class="brand-label-text">交互设计能力判别图</span></div>
+        <div class="brand-label"><span class="brand-label-text">交互设计能力判别图</span></div>
+        <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-controls="sidebarBody" aria-expanded="true" aria-label="收起目录" title="收起目录">
+          <span class="toggle-label">收起目录</span>
+          <span class="toggle-icon" aria-hidden="true"><i data-lucide="panel-left-close" class="button-icon"></i></span>
+        </button>
       </div>
 
       <div class="sidebar-body" id="sidebarBody">
@@ -1527,7 +1540,6 @@
       <header class="doc-intro">
         <div class="doc-intro-grid">
           <div>
-            <p class="eyebrow">交互设计问题判别工具</p>
             <h1>把“小优化”翻译成设计能力。</h1>
             <p class="intro-text">
               先定位用户卡点，再把具体改动归类成可复盘、可表达的能力证据。
@@ -2546,7 +2558,10 @@
     function setSidebarCollapsed(isCollapsed, shouldPersist = true) {
       shell.classList.toggle("is-collapsed", isCollapsed);
       sidebarToggle.setAttribute("aria-expanded", String(!isCollapsed));
-      sidebarToggleLabel.textContent = isCollapsed ? "展开目录" : "收起目录";
+      const toggleText = isCollapsed ? "展开目录" : "收起目录";
+      sidebarToggleLabel.textContent = toggleText;
+      sidebarToggle.setAttribute("aria-label", toggleText);
+      sidebarToggle.setAttribute("title", toggleText);
       if (shouldPersist) saveSidebarState(isCollapsed);
     }
 
