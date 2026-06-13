@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>交互设计能力判别图｜实战版</title>
+  <style>
+    :root {
+      --bg: #f7f6f1;
+      --paper: #fbfaf6;
+      --paper-2: #f1efe7;
+      --ink: #20231f;
+      --ink-2: #3a3f39;
+      --muted: #686d66;
+      --faint: #8b8e87;
+      --line: #d9d5c9;
+      --line-strong: #bdb8aa;
+      --accent: #2f6b5d;
+      --accent-ink: #1f4d43;
+      --accent-soft: #e6eee9;
+      --focus: #8fb9a8;
+      --radius: 6px;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      --mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 276px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      border-right: 1px solid var(--line);
+      background: var(--paper);
+      padding: 26px 20px;
+      overflow: auto;
+    }
+
+    .brand {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-label,
+    .section-no,
+    .meta,
+    .field-label,
+    .table-label,
+    .scenario-index,
+    .tiny-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: 0;
+      color: var(--faint);
+    }
+
+    .brand-label {
+      color: var(--accent-ink);
+      margin-bottom: 8px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.25;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .brand-text {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .nav {
+      display: grid;
+      gap: 2px;
+      padding: 18px 0 16px;
+    }
+
+    .nav a {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      align-items: start;
+      gap: 8px;
+      padding: 8px 9px;
+      border-radius: var(--radius);
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: var(--paper-2);
+      color: var(--ink);
+    }
+
+    .nav a.active .meta {
+      color: var(--accent-ink);
+    }
+
+    .sidebar-note {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1180px;
+      padding: 34px 46px 80px;
+    }
+
+    .doc-intro {
+      padding: 16px 0 34px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .doc-intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent-ink);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: 42px;
+      line-height: 1.12;
+      font-weight: 780;
+    }
+
+    .intro-text {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--ink-2);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .value-line {
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+      color: var(--ink-2);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .value-line strong {
+      display: block;
+      color: var(--ink);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    section {
+      display: grid;
+      grid-template-columns: 156px minmax(0, 1fr);
+      gap: 28px;
+      padding: 42px 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 24px;
+    }
+
+    .section-no {
+      padding-top: 4px;
+      color: var(--accent-ink);
+    }
+
+    .section-body {
+      min-width: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 760;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 10px 0 24px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .row-list {
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+    }
+
+    .row-item {
+      display: grid;
+      grid-template-columns: 168px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line);
+      min-height: 76px;
+    }
+
+    .row-key {
+      padding: 16px;
+      border-right: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .row-value {
+      padding: 16px 18px;
+      color: var(--ink-2);
+    }
+
+    .row-value strong {
+      color: var(--ink);
+      font-weight: 720;
+    }
+
+    .row-item.emphasis {
+      background: var(--accent-soft);
+    }
+
+    .stuck-map {
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+    }
+
+    .stuck-row {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.1fr);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stuck-row.header {
+      background: var(--paper-2);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .stuck-cell {
+      padding: 14px 15px;
+      border-right: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .stuck-cell:last-child {
+      border-right: 0;
+    }
+
+    .stuck-cell strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .stuck-cell p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .ability-stack {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .ability-row {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .ability-title {
+      padding: 18px 18px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .ability-title h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.3;
+      font-weight: 760;
+    }
+
+    .ability-title p {
+      margin: 10px 0 0;
+      color: var(--accent-ink);
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .ability-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ability-field {
+      padding: 16px 18px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      min-height: 116px;
+    }
+
+    .ability-field:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .ability-field.wide {
+      grid-column: 1 / -1;
+      border-right: 0;
+      border-bottom: 0;
+      min-height: 0;
+    }
+
+    .field-label {
+      margin-bottom: 8px;
+    }
+
+    .ability-field p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .memory {
+      display: inline;
+      color: var(--accent-ink);
+      font-weight: 700;
+    }
+
+    .boundary-list {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .boundary-item {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .boundary-title {
+      padding: 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .boundary-title h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .boundary-title p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .boundary-content {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .compare-block {
+      padding: 16px 18px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .compare-block:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .compare-block.rule {
+      grid-column: 1 / -1;
+      border-right: 0;
+      border-bottom: 0;
+      background: var(--paper-2);
+    }
+
+    .compare-block strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .compare-block p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .example {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .diagnoser {
+      display: grid;
+      grid-template-columns: 318px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .scenario-list {
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+    }
+
+    .scenario-button {
+      appearance: none;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 14px 12px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      min-height: 68px;
+    }
+
+    .scenario-button:hover {
+      background: var(--paper-2);
+    }
+
+    .scenario-button.active {
+      background: var(--accent-soft);
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
+    .scenario-button:focus-visible,
+    .nav a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .scenario-index {
+      padding-top: 2px;
+      color: var(--faint);
+    }
+
+    .scenario-name {
+      display: block;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 680;
+    }
+
+    .scenario-ability {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .diagnosis {
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+      min-width: 0;
+    }
+
+    .diagnosis-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .diagnosis-head h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.35;
+      font-weight: 760;
+    }
+
+    .ability-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: var(--radius);
+      background: var(--paper-2);
+      color: var(--accent-ink);
+      font-size: 12px;
+      font-family: var(--mono);
+      white-space: nowrap;
+    }
+
+    .diagnosis-flow {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .diagnosis-field {
+      padding: 17px 20px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      min-height: 138px;
+    }
+
+    .diagnosis-field:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .diagnosis-field p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 15px;
+      line-height: 1.68;
+    }
+
+    .diagnosis-field .plain-text {
+      margin-top: 8px;
+      color: var(--accent-ink);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .review-statement {
+      padding: 18px 20px;
+      background: var(--paper-2);
+    }
+
+    .review-statement p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .translation-table {
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+    }
+
+    .translation-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .translation-cell {
+      padding: 16px 18px;
+      border-right: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .translation-cell:last-child {
+      border-right: 0;
+    }
+
+    .translation-cell p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .translation-cell strong {
+      color: var(--ink);
+    }
+
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+      background: var(--paper);
+    }
+
+    .usage-block {
+      padding: 18px 20px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .usage-block:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .usage-block h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .step-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .step-list li {
+      counter-increment: steps;
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .step-list li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .step-list li::before {
+      content: counter(steps, decimal-leading-zero);
+      color: var(--accent-ink);
+      font-family: var(--mono);
+      font-size: 12px;
+      padding-top: 2px;
+    }
+
+    .mantra {
+      margin-top: 18px;
+      border-top: 1px solid var(--line-strong);
+      padding: 18px 0 0;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .mantra strong {
+      color: var(--accent-ink);
+    }
+
+    @media (max-width: 1020px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      main {
+        padding: 28px 24px 70px;
+        max-width: none;
+      }
+
+      .doc-intro-grid,
+      section,
+      .diagnoser {
+        grid-template-columns: 1fr;
+      }
+
+      .section-no {
+        padding-top: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        font-size: 15px;
+      }
+
+      main {
+        padding: 22px 16px 56px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .row-item,
+      .stuck-row,
+      .ability-row,
+      .boundary-item,
+      .translation-row,
+      .usage-grid,
+      .diagnosis-head,
+      .diagnosis-flow,
+      .boundary-content,
+      .ability-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .row-key,
+      .ability-title,
+      .boundary-title,
+      .translation-cell,
+      .usage-block,
+      .stuck-cell,
+      .compare-block,
+      .diagnosis-field,
+      .ability-field {
+        border-right: 0;
+      }
+
+      .stuck-row.header {
+        display: none;
+      }
+
+      .stuck-cell,
+      .translation-cell,
+      .compare-block,
+      .diagnosis-field,
+      .ability-field {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .ability-field.wide,
+      .compare-block.rule {
+        border-bottom: 0;
+      }
+
+      .ability-badge {
+        width: fit-content;
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-label">交互设计能力判别图</div>
+        <h2 class="brand-title">从零散优化到可复盘能力</h2>
+        <p class="brand-text">先判断用户卡在哪里，再把具体改动翻译成底层设计能力。</p>
+      </div>
+
+      <nav class="nav" id="nav" aria-label="页面目录">
+        <a href="#problem"><span class="meta">01</span><span>我的真实问题</span></a>
+        <a href="#stuck"><span class="meta">02</span><span>先问用户卡在哪里</span></a>
+        <a href="#abilities"><span class="meta">03</span><span>六类底层设计能力</span></a>
+        <a href="#boundaries"><span class="meta">04</span><span>易混概念边界</span></a>
+        <a href="#diagnoser"><span class="meta">05</span><span>可交互判别器</span></a>
+        <a href="#review"><span class="meta">06</span><span>项目复盘表达</span></a>
+        <a href="#usage"><span class="meta">07</span><span>使用方法</span></a>
+      </nav>
+
+      <div class="sidebar-note">
+        使用顺序：看到一个具体体验问题，先找“用户卡点”，再看它属于哪类能力，最后组织成项目表达。
+      </div>
+    </aside>
+
+    <main>
+      <header class="doc-intro">
+        <div class="doc-intro-grid">
+          <div>
+            <p class="eyebrow">实用型交互设计问题判别工具</p>
+            <h1>把“小优化”翻译成设计能力。</h1>
+            <p class="intro-text">
+              这个页面不是理论百科。它帮助你在看到页面乱、流程长、按钮弱、提示缺失、规则说不清时，快速判断问题到底发生在哪一层，并把优化动作沉淀成可复盘、可表达的交互设计能力。
+            </p>
+          </div>
+          <div class="value-line">
+            <strong>核心价值</strong>
+            帮你把“零散的小优化”翻译成“可复盘、可表达、可沉淀的交互设计能力”。
+          </div>
+        </div>
+      </header>
+
+      <section id="problem">
+        <div class="section-no">01 / Problem</div>
+        <div class="section-body">
+          <h2>我的真实问题：不是缺少知识点，而是缺少判别系统。</h2>
+          <p class="lead">工作里很多优化都很细：改流程、调布局、重排信息、补状态、改按钮。难点不是不会做，而是复盘时不知道这些动作背后体现了什么能力。</p>
+          <div class="row-list">
+            <div class="row-item">
+              <div class="row-key">表层动作</div>
+              <div class="row-value">我调整了排版、按钮、提示、流程、规则说明。</div>
+            </div>
+            <div class="row-item">
+              <div class="row-key">复盘困境</div>
+              <div class="row-value">说出口容易变成“我改了页面”，听起来像执行细节，不像设计判断。</div>
+            </div>
+            <div class="row-item">
+              <div class="row-key">混淆原因</div>
+              <div class="row-value">同一个优化可能跨多层：既有信息组织，也有视觉层级；既有流程路径，也有操作入口。</div>
+            </div>
+            <div class="row-item emphasis">
+              <div class="row-key">正确入口</div>
+              <div class="row-value"><strong>不要先背概念，先问用户真实卡在哪里。</strong>卡点找准了，能力分类才会稳定。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="stuck">
+        <div class="section-no">02 / Stuck Point</div>
+        <div class="section-body">
+          <h2>先问用户卡在哪里。</h2>
+          <p class="lead">把问题从“页面有什么不对”换成“用户在哪一步受阻”。这个转换会直接指向底层能力。</p>
+          <div class="stuck-map">
+            <div class="stuck-row header">
+              <div class="stuck-cell">用户卡点</div>
+              <div class="stuck-cell">常见现象</div>
+              <div class="stuck-cell">对应能力</div>
+              <div class="stuck-cell">一句话判断</div>
+            </div>
+            <div class="stuck-row">
+              <div class="stuck-cell"><strong>卡在路径</strong><p>不知道下一步去哪</p></div>
+              <div class="stuck-cell">步骤太多、来回跳转、分支复杂、中断后难恢复。</div>
+              <div class="stuck-cell">流程路径设计</div>
+              <div class="stuck-cell">看“路怎么走得顺”。</div>
+            </div>
+            <div class="stuck-row">
+              <div class="stuck-cell"><strong>卡在理解</strong><p>不知道信息怎么归类</p></div>
+              <div class="stuck-cell">字段堆在一起、命名不清、主次关系混乱。</div>
+              <div class="stuck-cell">信息架构</div>
+              <div class="stuck-cell">看“东西怎么分，谁先谁后”。</div>
+            </div>
+            <div class="stuck-row">
+              <div class="stuck-cell"><strong>卡在扫读</strong><p>看得见但扫不快</p></div>
+              <div class="stuck-cell">列表密、页面乱、重点弱、对齐和层级不稳定。</div>
+              <div class="stuck-cell">页面布局 / 视觉层级</div>
+              <div class="stuck-cell">看“分好的信息怎么摆才好读”。</div>
+            </div>
+            <div class="stuck-row">
+              <div class="stuck-cell"><strong>卡在操作</strong><p>知道目标但不会动手</p></div>
+              <div class="stuck-cell">按钮不明显、入口深、控件不好选、输入成本高。</div>
+              <div class="stuck-cell">操作控件设计</div>
+              <div class="stuck-cell">看“怎么点、怎么选、怎么填”。</div>
+            </div>
+            <div class="stuck-row">
+              <div class="stuck-cell"><strong>卡在反馈</strong><p>不知道系统有没有回应</p></div>
+              <div class="stuck-cell">点完没反应、失败原因不明、加载和成功状态缺失。</div>
+              <div class="stuck-cell">状态反馈</div>
+              <div class="stuck-cell">看“现在发生了什么，下一步是什么”。</div>
+            </div>
+            <div class="stuck-row">
+              <div class="stuck-cell"><strong>卡在规则</strong><p>不知道为什么能不能做</p></div>
+              <div class="stuck-cell">按钮置灰、权限限制、状态限制、业务条件说不清。</div>
+              <div class="stuck-cell">规则逻辑</div>
+              <div class="stuck-cell">看“什么情况下能不能做，为什么”。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="abilities">
+        <div class="section-no">03 / Abilities</div>
+        <div class="section-body">
+          <h2>六类底层设计能力。</h2>
+          <p class="lead">每个概念都用同一套格式记：专业说法保证准确，一句话记忆帮助你在项目里快速判断。</p>
+
+          <div class="ability-stack">
+            <article class="ability-row">
+              <div class="ability-title">
+                <h3>流程路径设计</h3>
+                <p>路怎么走得顺。</p>
+              </div>
+              <div class="ability-fields">
+                <div class="ability-field">
+                  <div class="field-label">专业说法</div>
+                  <p>围绕用户任务，设计从开始到完成的步骤、页面跳转、分支判断、中断恢复和完成反馈。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">一句话记忆</div>
+                  <p><span class="memory">流程就是：用户要走几步，路顺不顺。</span></p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">常见表现</div>
+                  <p>步骤太多、重复确认、跨页查信息、路径绕、用户不知道下一步去哪。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">设计动作</div>
+                  <p>合并步骤、减少跳转、前置关键判断、补充进度、设计中断后的返回和恢复。</p>
+                </div>
+                <div class="ability-field wide">
+                  <div class="field-label">复盘表达</div>
+                  <p>我优化了任务完成路径，压缩低价值步骤并减少跨页跳转，降低用户从开始到完成的路径成本。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ability-row">
+              <div class="ability-title">
+                <h3>信息架构</h3>
+                <p>东西怎么分，谁先谁后。</p>
+              </div>
+              <div class="ability-fields">
+                <div class="ability-field">
+                  <div class="field-label">专业说法</div>
+                  <p>围绕用户任务，对信息进行分类、分组、命名、排序和优先级组织，帮助用户建立理解路径。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">一句话记忆</div>
+                  <p><span class="memory">信息架构就是：东西怎么分，谁先谁后。</span></p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">常见表现</div>
+                  <p>信息堆叠、字段关系不明、分类混乱、用户看完仍不知道哪些信息重要。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">设计动作</div>
+                  <p>重组信息分组、调整主次顺序、统一命名、拆分或合并模块、明确对象关系。</p>
+                </div>
+                <div class="ability-field wide">
+                  <div class="field-label">复盘表达</div>
+                  <p>我重构了信息分组和优先级，让用户先看到决策所需的核心信息，再查看辅助说明和操作入口。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ability-row">
+              <div class="ability-title">
+                <h3>页面布局 / 视觉层级</h3>
+                <p>已经分好的信息怎么摆。</p>
+              </div>
+              <div class="ability-fields">
+                <div class="ability-field">
+                  <div class="field-label">专业说法</div>
+                  <p>通过位置、空间、对齐、字号、字重、密度和视觉重心，组织页面的阅读顺序和扫读效率。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">一句话记忆</div>
+                  <p><span class="memory">布局就是：信息分好以后，怎么摆得更好读。</span></p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">常见表现</div>
+                  <p>页面乱、重点弱、列表扫读慢、按钮和内容竞争、用户需要反复读才能判断。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">设计动作</div>
+                  <p>调整对齐、间距、分区、固定字段位置、强化关键状态、降低低价值信息权重。</p>
+                </div>
+                <div class="ability-field wide">
+                  <div class="field-label">复盘表达</div>
+                  <p>我通过布局和视觉层级重排阅读路径，让用户更快定位重点信息和下一步操作。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ability-row">
+              <div class="ability-title">
+                <h3>操作控件设计</h3>
+                <p>怎么点、选、填最省力。</p>
+              </div>
+              <div class="ability-fields">
+                <div class="ability-field">
+                  <div class="field-label">专业说法</div>
+                  <p>设计用户在具体步骤中如何点击、选择、输入、确认、撤销、批量处理和规避误操作。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">一句话记忆</div>
+                  <p><span class="memory">操作设计就是：这一步怎么做才顺手、安全。</span></p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">常见表现</div>
+                  <p>主按钮弱、入口藏得深、控件不匹配、输入复杂、危险操作容易误触。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">设计动作</div>
+                  <p>强化主操作、收纳低频操作、选择合适控件、减少输入、增加确认、撤销或防误触机制。</p>
+                </div>
+                <div class="ability-field wide">
+                  <div class="field-label">复盘表达</div>
+                  <p>我根据操作频率和风险等级重排操作入口，降低寻找成本，并通过确认或撤销机制减少误操作风险。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ability-row">
+              <div class="ability-title">
+                <h3>状态反馈</h3>
+                <p>系统有没有把话说清楚。</p>
+              </div>
+              <div class="ability-fields">
+                <div class="ability-field">
+                  <div class="field-label">专业说法</div>
+                  <p>让用户理解系统当前状态、操作结果、失败原因、恢复路径和下一步可做动作。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">一句话记忆</div>
+                  <p><span class="memory">状态反馈就是：让用户知道发生了什么。</span></p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">常见表现</div>
+                  <p>点完没反应、加载无进度、失败原因不明、禁用没有解释、空状态没有下一步。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">设计动作</div>
+                  <p>补充加载、成功、失败、空、禁用、进行中、异常恢复和结果确认等状态。</p>
+                </div>
+                <div class="ability-field wide">
+                  <div class="field-label">复盘表达</div>
+                  <p>我补齐了关键状态反馈和恢复路径，让用户能确认系统结果、理解失败原因，并知道下一步怎么处理。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ability-row">
+              <div class="ability-title">
+                <h3>规则逻辑</h3>
+                <p>什么情况下能不能做。</p>
+              </div>
+              <div class="ability-fields">
+                <div class="ability-field">
+                  <div class="field-label">专业说法</div>
+                  <p>梳理不同角色、权限、对象状态、业务条件和边界场景下的可见、可用、限制与冲突规则。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">一句话记忆</div>
+                  <p><span class="memory">规则逻辑就是：能不能做，为什么。</span></p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">常见表现</div>
+                  <p>按钮有时出现有时消失、不同角色看到的入口不同、状态限制和业务限制说不清。</p>
+                </div>
+                <div class="ability-field">
+                  <div class="field-label">设计动作</div>
+                  <p>梳理权限矩阵、状态机、业务条件、边界场景、冲突规则，并定义对应提示。</p>
+                </div>
+                <div class="ability-field wide">
+                  <div class="field-label">复盘表达</div>
+                  <p>我梳理了不同角色和状态下的可见、可用、禁用规则，让业务限制更一致，也更容易被用户理解。</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="boundaries">
+        <div class="section-no">04 / Boundaries</div>
+        <div class="section-body">
+          <h2>易混概念边界。</h2>
+          <p class="lead">真实项目里经常不是非此即彼，而是“先解决 A，再用 B 强化”。边界清楚，复盘表达就不会混。</p>
+
+          <div class="boundary-list">
+            <article class="boundary-item">
+              <div class="boundary-title">
+                <h3>信息架构 vs 页面布局</h3>
+                <p>一个决定信息关系，一个决定视觉呈现。</p>
+              </div>
+              <div class="boundary-content">
+                <div class="compare-block">
+                  <strong>信息架构</strong>
+                  <p>解决信息怎么分、怎么命名、谁更重要、谁和谁属于一组。</p>
+                  <div class="example">例子：把订单状态、金额、商品名重新分组。</div>
+                </div>
+                <div class="compare-block">
+                  <strong>页面布局</strong>
+                  <p>解决信息已经分好后，怎么摆得更好扫、更好读、更好判断。</p>
+                  <div class="example">例子：金额加粗、状态放右上角、按钮固定底部。</div>
+                </div>
+                <div class="compare-block rule">
+                  <strong>判别句</strong>
+                  <p>如果你在改“信息关系”，偏信息架构；如果你在改“呈现方式”，偏页面布局。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="boundary-item">
+              <div class="boundary-title">
+                <h3>流程优化 vs 操作设计</h3>
+                <p>一个看整条路，一个看某一步怎么做。</p>
+              </div>
+              <div class="boundary-content">
+                <div class="compare-block">
+                  <strong>流程优化</strong>
+                  <p>解决完成任务要走几步、经过哪些页面、分支是否绕、路径是否可恢复。</p>
+                  <div class="example">例子：把 4 步提交流程压缩成 2 步。</div>
+                </div>
+                <div class="compare-block">
+                  <strong>操作设计</strong>
+                  <p>解决某一步里用户怎么点、怎么选、怎么填、怎么确认和撤销。</p>
+                  <div class="example">例子：把提交按钮前置，增加撤销机制。</div>
+                </div>
+                <div class="compare-block rule">
+                  <strong>判别句</strong>
+                  <p>如果你在改“走哪条路”，偏流程；如果你在改“这一步怎么动手”，偏操作。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="boundary-item">
+              <div class="boundary-title">
+                <h3>规则逻辑 vs 状态反馈</h3>
+                <p>一个定义条件，一个解释结果和原因。</p>
+              </div>
+              <div class="boundary-content">
+                <div class="compare-block">
+                  <strong>规则逻辑</strong>
+                  <p>解决什么情况下能做、不能做、由哪个权限或业务条件决定。</p>
+                  <div class="example">例子：余额不足时不能提交。</div>
+                </div>
+                <div class="compare-block">
+                  <strong>状态反馈</strong>
+                  <p>解决系统有没有把当前状态、失败原因和下一步告诉用户。</p>
+                  <div class="example">例子：按钮置灰并提示“余额不足，请充值后提交”。</div>
+                </div>
+                <div class="compare-block rule">
+                  <strong>判别句</strong>
+                  <p>如果你在定义“限制条件”，偏规则逻辑；如果你在表达“为什么和怎么办”，偏状态反馈。</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="diagnoser">
+        <div class="section-no">05 / Diagnoser</div>
+        <div class="section-body">
+          <h2>可交互判别器。</h2>
+          <p class="lead">点一个常见现象，右侧会给出完整诊断链路：表层现象、用户卡点、底层能力、设计动作、复盘表达。</p>
+
+          <div class="diagnoser">
+            <div class="scenario-list" id="scenarioList" aria-label="常见问题列表"></div>
+
+            <article class="diagnosis" aria-live="polite">
+              <div class="diagnosis-head">
+                <h3 id="scenarioTitle">页面很乱，用户找不到重点</h3>
+                <span class="ability-badge" id="abilityBadge">信息架构 + 页面布局</span>
+              </div>
+              <div class="diagnosis-flow">
+                <div class="diagnosis-field">
+                  <div class="field-label">表层现象</div>
+                  <p id="surfaceText">页面信息很多，模块都在，但用户扫一眼不知道先看哪里。</p>
+                  <p class="plain-text" id="surfaceSimple">东西都摆上去了，但没有主次。</p>
+                </div>
+                <div class="diagnosis-field">
+                  <div class="field-label">用户卡点</div>
+                  <p id="stuckText">用户无法快速判断哪些信息与当前任务最相关。</p>
+                  <p class="plain-text" id="stuckSimple">不是看不见，是不知道该先看什么。</p>
+                </div>
+                <div class="diagnosis-field">
+                  <div class="field-label">底层能力</div>
+                  <p id="abilityText">先做信息架构，明确信息分组和优先级；再用页面布局强化阅读路径。</p>
+                  <p class="plain-text" id="abilitySimple">先决定怎么分，再决定怎么摆。</p>
+                </div>
+                <div class="diagnosis-field">
+                  <div class="field-label">设计动作</div>
+                  <p id="actionText">重排主信息、辅助信息和操作信息；合并重复模块；强化关键状态和主操作。</p>
+                  <p class="plain-text" id="actionSimple">让用户一眼知道重点和下一步。</p>
+                </div>
+              </div>
+              <div class="review-statement">
+                <div class="field-label">复盘表达</div>
+                <p id="statementText">这个优化表面上是页面排版调整，但真实问题是用户无法快速建立信息优先级。我先重组了信息架构，明确主信息、辅助信息和操作信息，再通过页面布局强化视觉层级，从而降低用户的扫描和判断成本。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="review">
+        <div class="section-no">06 / Review</div>
+        <div class="section-body">
+          <h2>项目复盘表达：把动作翻译成能力。</h2>
+          <p class="lead">复盘时不要只说“我改了什么”，要补上“用户卡在哪里、我用什么设计判断解决、结果降低了什么成本”。</p>
+
+          <div class="translation-table">
+            <div class="translation-row">
+              <div class="translation-cell">
+                <div class="table-label">原始说法</div>
+                <p>我改了页面排版。</p>
+              </div>
+              <div class="translation-cell">
+                <div class="table-label">专业表达</div>
+                <p><strong>我重构了信息优先级，并通过布局强化阅读路径，降低用户的扫描和判断成本。</strong></p>
+              </div>
+            </div>
+            <div class="translation-row">
+              <div class="translation-cell">
+                <div class="table-label">原始说法</div>
+                <p>我把流程改短了。</p>
+              </div>
+              <div class="translation-cell">
+                <div class="table-label">专业表达</div>
+                <p><strong>我优化了任务路径，合并低价值步骤并前置关键判断，降低用户完成任务的路径成本。</strong></p>
+              </div>
+            </div>
+            <div class="translation-row">
+              <div class="translation-cell">
+                <div class="table-label">原始说法</div>
+                <p>我把按钮调明显了。</p>
+              </div>
+              <div class="translation-cell">
+                <div class="table-label">专业表达</div>
+                <p><strong>我根据操作频率和风险等级重排操作入口，强化主操作、收纳低频操作，降低寻找成本和误操作风险。</strong></p>
+              </div>
+            </div>
+            <div class="translation-row">
+              <div class="translation-cell">
+                <div class="table-label">原始说法</div>
+                <p>我加了一些提示。</p>
+              </div>
+              <div class="translation-cell">
+                <div class="table-label">专业表达</div>
+                <p><strong>我补充了关键状态反馈，解释操作结果、失败原因和下一步动作，提升用户对系统结果的确定感。</strong></p>
+              </div>
+            </div>
+            <div class="translation-row">
+              <div class="translation-cell">
+                <div class="table-label">原始说法</div>
+                <p>我梳理了不同情况下按钮能不能点。</p>
+              </div>
+              <div class="translation-cell">
+                <div class="table-label">专业表达</div>
+                <p><strong>我梳理了角色、状态和业务条件下的可见可用规则，并通过反馈说明限制原因，减少用户对规则的猜测。</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="usage">
+        <div class="section-no">07 / Usage</div>
+        <div class="section-body">
+          <h2>使用方法。</h2>
+          <p class="lead">这张图真正的用法，是让你在工作当下和项目复盘时都能稳定套用同一条判断链。</p>
+
+          <div class="usage-grid">
+            <div class="usage-block">
+              <h3>遇到优化需求时</h3>
+              <ol class="step-list">
+                <li>先写下表层现象：页面乱、流程长、按钮弱、提示少、规则不清。</li>
+                <li>追问用户真实卡点：卡在路径、理解、扫读、操作、反馈还是规则。</li>
+                <li>匹配底层能力：流程、信息、布局、操作、状态、规则。</li>
+                <li>选择设计动作：减少、重组、前置、强化、解释、反馈、收纳。</li>
+              </ol>
+            </div>
+            <div class="usage-block">
+              <h3>做项目复盘时</h3>
+              <ol class="step-list">
+                <li>不要从“我改了什么样式”开始，先说用户遇到的阻力。</li>
+                <li>说明这个阻力对应哪类交互问题，必要时讲清跨层关系。</li>
+                <li>描述关键设计动作和前后变化，不只描述页面长什么样。</li>
+                <li>收束到能力表达：降低理解成本、路径成本、操作成本、判断成本或误操作风险。</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="mantra">
+            <strong>记忆口诀：</strong>流程看路，信息看分，布局看摆，操作看做，状态看反馈，规则看条件。
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const scenarios = [
+      {
+        title: "页面很乱，用户找不到重点",
+        badge: "信息架构 + 页面布局",
+        surface: "页面信息很多，模块都在，但用户扫一眼不知道先看哪里。",
+        surfaceSimple: "东西都摆上去了，但没有主次。",
+        stuck: "用户无法快速判断哪些信息与当前任务最相关。",
+        stuckSimple: "不是看不见，是不知道该先看什么。",
+        ability: "先做信息架构，明确信息分组和优先级；再用页面布局强化阅读路径。",
+        abilitySimple: "先决定怎么分，再决定怎么摆。",
+        action: "重排主信息、辅助信息和操作信息；合并重复模块；强化关键状态和主操作。",
+        actionSimple: "让用户一眼知道重点和下一步。",
+        statement: "这个优化表面上是页面排版调整，但真实问题是用户无法快速建立信息优先级。我先重组了信息架构，明确主信息、辅助信息和操作信息，再通过页面布局强化视觉层级，从而降低用户的扫描和判断成本。"
+      },
+      {
+        title: "流程步骤太多，用户总是来回跳转",
+        badge: "流程路径设计",
+        surface: "用户需要经过多个页面、重复确认或返回查找信息，任务完成路径很长。",
+        surfaceSimple: "路太绕，走着走着就断了。",
+        stuck: "用户卡在任务路径上，不是某一页不好看，而是从开始到完成的路不顺。",
+        stuckSimple: "不是点错了，是整条路设计得麻烦。",
+        ability: "流程路径设计关注步骤、分支、中断、恢复和完成反馈，核心是减少不必要的任务阻力。",
+        abilitySimple: "把路修直，把岔路标清楚。",
+        action: "压缩步骤、合并页面、减少跨页跳转、前置关键判断、补充进度和中断恢复。",
+        actionSimple: "能一步做完的，不让用户绕三步。",
+        statement: "这个优化的核心不是单页视觉，而是任务流程阻力。原流程存在多次跳转和重复判断，我通过合并低价值步骤、前置关键判断、减少中断路径，降低了用户完成任务的路径成本。"
+      },
+      {
+        title: "按钮不明显，用户不知道该点哪里",
+        badge: "操作控件设计",
+        surface: "关键操作入口不明显，主次按钮竞争，或者高频操作被藏得太深。",
+        surfaceSimple: "用户想做事，但找不到下手的地方。",
+        stuck: "用户卡在行动入口和操作方式上，不确定应该点哪个、选哪个、是否有风险。",
+        stuckSimple: "知道要干嘛，但不知道怎么动手。",
+        ability: "操作控件设计关注主次操作、控件选择、输入方式、确认机制和风险控制。",
+        abilitySimple: "把怎么做设计得顺手、安全。",
+        action: "强化主操作，弱化低频操作；前置高频低风险动作；对危险操作增加确认、撤销或延迟触发。",
+        actionSimple: "常用的好找，危险的别误点。",
+        statement: "这个问题的核心是操作入口和操作权重不清。我根据操作频率与风险等级，重新分配主次操作，将高频操作前置，将低频或高风险操作收纳，并补充确认机制，降低用户寻找成本和误操作风险。"
+      },
+      {
+        title: "用户不知道操作成功没有",
+        badge: "状态反馈",
+        surface: "点击后没有明显反馈，加载、成功、失败、禁用原因不清楚。",
+        surfaceSimple: "用户做完了，但系统没回应清楚。",
+        stuck: "用户卡在结果确定性上，不知道系统是否收到操作、失败原因是什么、下一步怎么恢复。",
+        stuckSimple: "点完以后心里没底。",
+        ability: "状态反馈设计关注系统当前状态、操作结果、异常原因和恢复路径。",
+        abilitySimple: "让用户知道现在发生了什么。",
+        action: "补充加载态、成功态、失败态、空状态、禁用态、进行中状态和错误恢复说明。",
+        actionSimple: "每种情况都要有交代。",
+        statement: "这个优化的核心是补足状态反馈。原方案只覆盖正常页面，没有清晰表达加载、失败、禁用和成功后的状态。我补充了关键状态和恢复路径，提升用户对系统结果的确定感。"
+      },
+      {
+        title: "有些情况下不能操作，但用户不知道为什么",
+        badge: "规则逻辑 + 状态反馈",
+        surface: "同一个按钮在不同状态下有时可用、有时置灰、有时消失，但原因不清楚。",
+        surfaceSimple: "到底能不能做，为什么，没人说清。",
+        stuck: "用户卡在规则理解上，不知道当前限制来自权限、状态、业务条件还是数据问题。",
+        stuckSimple: "不是不会操作，是不知道规则。",
+        ability: "规则逻辑负责定义什么情况下能不能做；状态反馈负责把限制原因和下一步告诉用户。",
+        abilitySimple: "先定义条件，再解释原因。",
+        action: "梳理角色权限、对象状态、业务条件和边界场景；为置灰、隐藏、失败补充原因和恢复建议。",
+        actionSimple: "每个限制都要有原因。",
+        statement: "这个问题的根因不是按钮样式，而是业务规则和权限逻辑没有被清晰表达。我梳理了不同角色和对象状态下的可见、可用、禁用规则，并通过状态提示解释限制原因，减少用户对系统规则的猜测。"
+      },
+      {
+        title: "列表信息很多，用户扫得很慢",
+        badge: "信息架构 + 页面布局",
+        surface: "列表项信息密度高，字段都重要，但用户无法快速比较和定位。",
+        surfaceSimple: "每条都长得差不多，扫不出重点。",
+        stuck: "用户卡在批量扫描和比较上，需要反复读完整内容才能做判断。",
+        stuckSimple: "不是没有信息，是信息不方便比较。",
+        ability: "信息架构负责确定识别、判断、比较、操作信息；页面布局负责提高扫读效率。",
+        abilitySimple: "先决定比什么，再设计怎么扫。",
+        action: "固定关键字段位置、强化状态标签、统一对齐、减少低价值字段、把操作与对象绑定。",
+        actionSimple: "让用户不用读完也能判断。",
+        statement: "这个优化不是单纯美化列表，而是提升批量扫描效率。我先区分识别信息、判断信息和操作信息，再通过固定字段位置、统一对齐和强化关键状态，降低用户在列表中的比较成本。"
+      },
+      {
+        title: "表单总是填错，用户反复返工",
+        badge: "操作控件设计 + 状态反馈",
+        surface: "输入字段多，格式要求隐藏，错误提示滞后，用户提交后才发现问题。",
+        surfaceSimple: "填的时候没人提醒，错了才知道。",
+        stuck: "用户卡在输入和纠错上，不知道该怎么填、哪里错、怎么改。",
+        stuckSimple: "不是不愿意填，是填起来费劲。",
+        ability: "操作控件设计降低输入成本；状态反馈在输入前、中、后说明格式、校验结果和修正方法。",
+        abilitySimple: "少填、好填、错了知道怎么改。",
+        action: "减少非必要字段，提供默认值和选择控件；把格式要求前置，补充即时校验和可执行的错误提示。",
+        actionSimple: "让错误尽量发生在提交之前。",
+        statement: "这个优化聚焦在输入成本和纠错成本。我减少了非必要输入，优化控件选择，并把格式要求和校验反馈前置，让用户在提交前就能发现并修正问题。"
+      }
+    ];
+
+    const list = document.getElementById("scenarioList");
+    const fields = {
+      title: document.getElementById("scenarioTitle"),
+      badge: document.getElementById("abilityBadge"),
+      surface: document.getElementById("surfaceText"),
+      surfaceSimple: document.getElementById("surfaceSimple"),
+      stuck: document.getElementById("stuckText"),
+      stuckSimple: document.getElementById("stuckSimple"),
+      ability: document.getElementById("abilityText"),
+      abilitySimple: document.getElementById("abilitySimple"),
+      action: document.getElementById("actionText"),
+      actionSimple: document.getElementById("actionSimple"),
+      statement: document.getElementById("statementText")
+    };
+
+    function renderScenario(index) {
+      const item = scenarios[index];
+      fields.title.textContent = item.title;
+      fields.badge.textContent = item.badge;
+      fields.surface.textContent = item.surface;
+      fields.surfaceSimple.textContent = item.surfaceSimple;
+      fields.stuck.textContent = item.stuck;
+      fields.stuckSimple.textContent = item.stuckSimple;
+      fields.ability.textContent = item.ability;
+      fields.abilitySimple.textContent = item.abilitySimple;
+      fields.action.textContent = item.action;
+      fields.actionSimple.textContent = item.actionSimple;
+      fields.statement.textContent = item.statement;
+
+      document.querySelectorAll(".scenario-button").forEach((button, buttonIndex) => {
+        const isActive = buttonIndex === index;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+    }
+
+    function createScenarioButton(item, index) {
+      const button = document.createElement("button");
+      button.className = "scenario-button";
+      button.type = "button";
+      button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+      if (index === 0) button.classList.add("active");
+
+      const number = document.createElement("span");
+      number.className = "scenario-index";
+      number.textContent = String(index + 1).padStart(2, "0");
+
+      const content = document.createElement("span");
+      const name = document.createElement("span");
+      name.className = "scenario-name";
+      name.textContent = item.title;
+      const ability = document.createElement("span");
+      ability.className = "scenario-ability";
+      ability.textContent = item.badge;
+
+      content.append(name, ability);
+      button.append(number, content);
+      button.addEventListener("click", () => renderScenario(index));
+      return button;
+    }
+
+    scenarios.forEach((item, index) => {
+      list.appendChild(createScenarioButton(item, index));
+    });
+
+    const navLinks = Array.from(document.querySelectorAll(".nav a"));
+    const sections = navLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = "#" + entry.target.id;
+        navLinks.forEach((link) => {
+          const isActive = link.getAttribute("href") === id;
+          link.classList.toggle("active", isActive);
+          if (isActive) {
+            link.setAttribute("aria-current", "true");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      });
+    }, { rootMargin: "-25% 0px -65% 0px", threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
