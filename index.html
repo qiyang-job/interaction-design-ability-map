@@ -7,19 +7,19 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: oklch(97.8% 0 0);
-      --paper: oklch(99.2% 0 0);
-      --paper-2: oklch(95.2% 0 0);
-      --paper-3: oklch(91.8% 0 0);
+      --bg: oklch(96.8% 0 0);
+      --paper: oklch(97.4% 0 0);
+      --paper-2: oklch(94.4% 0 0);
+      --paper-3: oklch(90.5% 0 0);
       --ink: oklch(18% 0 0);
       --ink-2: oklch(31% 0 0);
       --muted: oklch(46% 0 0);
       --faint: oklch(63% 0 0);
-      --line: oklch(86.5% 0 0);
-      --line-strong: oklch(70% 0 0);
+      --line: oklch(83.5% 0 0);
+      --line-strong: oklch(66% 0 0);
       --accent: oklch(24% 0 0);
       --accent-ink: oklch(16% 0 0);
-      --accent-soft: oklch(93.5% 0 0);
+      --accent-soft: oklch(91.5% 0 0);
       --mark: oklch(38% 0 0);
       --mark-soft: oklch(95.5% 0 0);
       --focus: oklch(52% 0 0);
@@ -306,19 +306,19 @@
     main {
       width: 100%;
       max-width: 1160px;
-      padding: var(--space-6) var(--space-7) var(--space-8);
+      padding: var(--space-5) var(--space-7) var(--space-8);
     }
 
     .doc-intro {
-      padding: var(--space-4) 0 var(--space-6);
+      padding: var(--space-4) 0 var(--space-5);
       border-bottom: 1px solid var(--line-strong);
     }
 
     .doc-intro-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
-      gap: var(--space-7);
-      align-items: end;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: var(--space-6);
+      align-items: start;
     }
 
     .eyebrow {
@@ -338,17 +338,17 @@
     h1 {
       margin: 0;
       max-width: 760px;
-      font-size: var(--text-xxl);
-      line-height: 1.15;
+      font-size: 2.125rem;
+      line-height: 1.18;
       font-weight: 780;
     }
 
     .intro-text {
-      max-width: 68ch;
-      margin: var(--space-4) 0 0;
+      max-width: 62ch;
+      margin: var(--space-3) 0 0;
       color: var(--ink-2);
       font-size: var(--text-md);
-      line-height: 1.75;
+      line-height: 1.65;
     }
 
     .value-line {
@@ -368,15 +368,15 @@
 
     section {
       display: grid;
-      grid-template-columns: 148px minmax(0, 1fr);
-      gap: var(--space-6);
-      padding: var(--space-7) 0;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2);
+      padding: var(--space-6) 0;
       border-bottom: 1px solid var(--line);
       scroll-margin-top: 24px;
     }
 
     .section-no {
-      padding-top: 4px;
+      padding-top: 0;
       color: var(--accent-ink);
     }
 
@@ -386,54 +386,61 @@
 
     h2 {
       margin: 0;
-      font-size: var(--text-xl);
-      line-height: 1.25;
+      font-size: 1.375rem;
+      line-height: 1.32;
       font-weight: 760;
     }
 
     .section-title {
       display: flex;
       align-items: flex-start;
-      gap: var(--space-3);
+      gap: var(--space-2);
     }
 
     .section-title-icon {
-      width: 22px;
-      height: 22px;
-      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      margin-top: 5px;
       color: var(--ink);
     }
 
     .lead {
-      max-width: 72ch;
-      margin: var(--space-2) 0 var(--space-5);
+      max-width: 62ch;
+      margin: var(--space-2) 0 var(--space-4);
       color: var(--muted);
       font-size: var(--text-sm);
     }
 
     .row-list {
-      border-top: 1px solid var(--line-strong);
-      background: var(--paper);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      overflow: hidden;
     }
 
     .row-item {
-      display: grid;
-      grid-template-columns: 168px minmax(0, 1fr);
-      border-bottom: 1px solid var(--line);
-      min-height: 76px;
+      display: block;
+      min-height: 0;
+      background: var(--paper);
     }
 
     .row-key {
-      padding: 16px;
-      border-right: 1px solid var(--line);
+      padding: 14px 15px 4px;
+      border-right: 0;
       color: var(--muted);
       font-weight: 650;
       line-height: 1.45;
+      font-size: var(--text-sm);
     }
 
     .row-value {
-      padding: 16px 18px;
+      padding: 0 15px 15px;
       color: var(--ink-2);
+      font-size: 14px;
+      line-height: 1.62;
     }
 
     .row-value strong {
@@ -442,21 +449,26 @@
     }
 
     .row-item.emphasis {
-      background: var(--accent-soft);
+      background: var(--paper-3);
     }
 
     .stuck-map {
-      border-top: 1px solid var(--line-strong);
-      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      overflow: hidden;
     }
 
     .stuck-row {
       display: grid;
-      grid-template-columns: 140px minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.1fr);
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: 138px minmax(0, 1.25fr) minmax(0, .82fr) minmax(0, .95fr);
+      gap: 1px;
+      border-bottom: 0;
+      background: var(--line);
     }
 
     .stuck-row.header {
+      display: none;
       background: var(--paper-2);
       color: var(--muted);
       font-family: var(--mono);
@@ -465,12 +477,18 @@
 
     .stuck-cell {
       padding: 14px 15px;
-      border-right: 1px solid var(--line);
+      border-right: 0;
       min-width: 0;
+      background: var(--paper);
     }
 
-    .stuck-cell:last-child {
-      border-right: 0;
+    .stuck-cell:first-child {
+      background: var(--paper-2);
+    }
+
+    .stuck-cell:nth-child(3),
+    .stuck-cell:nth-child(4) {
+      background: var(--bg);
     }
 
     .stuck-cell strong {
@@ -489,25 +507,33 @@
     }
 
     .ability-stack {
-      border-top: 1px solid var(--line-strong);
+      display: grid;
+      gap: var(--space-3);
     }
 
     .ability-row {
       display: grid;
-      grid-template-columns: 230px minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: 0;
-      border-bottom: 1px solid var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       background: var(--paper);
+      overflow: hidden;
     }
 
     .ability-title {
-      padding: 18px 18px 20px;
-      border-right: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: 14px 16px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
     }
 
     .ability-title h3 {
       margin: 0;
-      font-size: 19px;
+      font-size: 17px;
       line-height: 1.3;
       font-weight: 760;
       display: flex;
@@ -516,27 +542,27 @@
     }
 
     .ability-title p {
-      margin: 10px 0 0;
+      margin: 0;
       color: var(--accent-ink);
-      font-size: 14px;
-      line-height: 1.55;
+      font-size: 13px;
+      line-height: 1.45;
       font-weight: 650;
+      text-align: right;
     }
 
     .ability-fields {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+      gap: 1px;
+      background: var(--line);
     }
 
     .ability-field {
-      padding: 16px 18px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      min-height: 116px;
-    }
-
-    .ability-field:nth-child(2n) {
+      padding: 14px 16px;
       border-right: 0;
+      border-bottom: 0;
+      min-height: 0;
+      background: var(--paper);
     }
 
     .ability-field.wide {
@@ -544,6 +570,17 @@
       border-right: 0;
       border-bottom: 0;
       min-height: 0;
+      background: var(--paper-2);
+    }
+
+    .ability-field:nth-child(2) {
+      background: var(--paper-3);
+    }
+
+    .ability-field:nth-child(2) p {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.55;
     }
 
     .field-label {
@@ -556,8 +593,8 @@
     .ability-field p {
       margin: 0;
       color: var(--ink-2);
-      font-size: 14px;
-      line-height: 1.65;
+      font-size: 13px;
+      line-height: 1.62;
     }
 
     .memory {
@@ -567,14 +604,17 @@
     }
 
     .boundary-list {
-      border-top: 1px solid var(--line-strong);
+      display: grid;
+      gap: var(--space-3);
     }
 
     .boundary-item {
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: 210px minmax(0, 1fr);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       background: var(--paper);
+      overflow: hidden;
     }
 
     .boundary-title {
@@ -601,23 +641,22 @@
     .boundary-content {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
     }
 
     .compare-block {
       padding: 16px 18px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .compare-block:nth-child(2n) {
       border-right: 0;
+      border-bottom: 0;
+      background: var(--paper);
     }
 
     .compare-block.rule {
       grid-column: 1 / -1;
       border-right: 0;
       border-bottom: 0;
-      background: var(--paper-2);
+      background: var(--paper-3);
     }
 
     .compare-block strong {
@@ -657,9 +696,11 @@
 
     .translator-panel,
     .translator-result {
-      border-top: 1px solid var(--line-strong);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       background: var(--paper);
       min-width: 0;
+      overflow: hidden;
     }
 
     .translator-head {
@@ -686,11 +727,14 @@
 
     .form-stack {
       display: grid;
+      gap: 1px;
+      background: var(--line);
     }
 
     .form-row {
       padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 0;
+      background: var(--paper);
     }
 
     .form-row label {
@@ -797,7 +841,8 @@
       flex-wrap: wrap;
       gap: 10px;
       padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 0;
+      background: var(--paper);
     }
 
     .action-button {
@@ -829,13 +874,16 @@
     .result-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
     }
 
     .result-cell {
       padding: 16px 18px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      border-right: 0;
+      border-bottom: 0;
       min-height: 116px;
+      background: var(--paper);
     }
 
     .result-cell:nth-child(2n) {
@@ -845,6 +893,7 @@
     .result-cell.wide {
       grid-column: 1 / -1;
       border-right: 0;
+      background: var(--paper-2);
     }
 
     .result-cell p {
@@ -877,8 +926,10 @@
     }
 
     .scenario-list {
-      border-top: 1px solid var(--line-strong);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       background: var(--paper);
+      overflow: hidden;
     }
 
     .scenario-button {
@@ -949,9 +1000,11 @@
     }
 
     .diagnosis {
-      border-top: 1px solid var(--line-strong);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       background: var(--paper);
       min-width: 0;
+      overflow: hidden;
     }
 
     .diagnosis-head {
@@ -989,17 +1042,16 @@
     .diagnosis-flow {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
     }
 
     .diagnosis-field {
       padding: 17px 20px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      min-height: 138px;
-    }
-
-    .diagnosis-field:nth-child(2n) {
       border-right: 0;
+      border-bottom: 0;
+      min-height: 138px;
+      background: var(--paper);
     }
 
     .diagnosis-field p {
@@ -1029,24 +1081,26 @@
     }
 
     .translation-table {
-      border-top: 1px solid var(--line-strong);
-      background: var(--paper);
+      display: grid;
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      overflow: hidden;
     }
 
     .translation-row {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
-      border-bottom: 1px solid var(--line);
+      gap: 1px;
+      background: var(--line);
     }
 
     .translation-cell {
       padding: 16px 18px;
-      border-right: 1px solid var(--line);
-      min-width: 0;
-    }
-
-    .translation-cell:last-child {
       border-right: 0;
+      min-width: 0;
+      background: var(--paper);
     }
 
     .translation-cell p {
@@ -1063,18 +1117,18 @@
     .usage-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      border-top: 1px solid var(--line-strong);
-      background: var(--paper);
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      overflow: hidden;
     }
 
     .usage-block {
       padding: 18px 20px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .usage-block:nth-child(2n) {
       border-right: 0;
+      border-bottom: 0;
+      background: var(--paper);
     }
 
     .usage-block h3 {
@@ -1132,19 +1186,25 @@
     }
 
     .product-grid {
-      border-top: 1px solid var(--line-strong);
-      background: var(--paper);
+      display: grid;
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      overflow: hidden;
     }
 
     .product-row {
       display: grid;
       grid-template-columns: 180px minmax(0, 1fr);
-      border-bottom: 1px solid var(--line);
+      gap: 1px;
+      background: var(--line);
     }
 
     .product-key {
       padding: 16px 18px;
-      border-right: 1px solid var(--line);
+      border-right: 0;
+      background: var(--paper-2);
       color: var(--muted);
       font-weight: 680;
       line-height: 1.45;
@@ -1152,6 +1212,7 @@
 
     .product-value {
       padding: 16px 18px;
+      background: var(--paper);
       color: var(--ink-2);
       font-size: 14px;
       line-height: 1.65;
@@ -1276,6 +1337,7 @@
       }
 
       .row-item,
+      .row-list,
       .stuck-row,
       .ability-row,
       .boundary-item,
@@ -1288,6 +1350,15 @@
       .boundary-content,
       .ability-fields {
         grid-template-columns: 1fr;
+      }
+
+      .ability-title {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+      }
+
+      .ability-title p {
+        text-align: left;
       }
 
       .row-key,
@@ -1369,47 +1440,47 @@
             <p class="eyebrow">实用型交互设计问题判别工具</p>
             <h1>把“小优化”翻译成设计能力。</h1>
             <p class="intro-text">
-              这个页面不是理论百科。它帮助你在看到页面乱、流程长、按钮弱、提示缺失、规则说不清时，快速判断问题到底发生在哪一层，并把优化动作沉淀成可复盘、可表达的交互设计能力。
+              看到页面乱、流程长、按钮弱、提示缺失、规则说不清时，先判断用户卡点，再把优化动作沉淀成可复盘、可表达的交互设计能力。
             </p>
           </div>
           <div class="value-line">
             <strong>核心价值</strong>
-            帮你把“零散的小优化”翻译成“可复盘、可表达、可沉淀的交互设计能力”。
+            把“零散的小优化”翻译成“可复盘、可表达、可沉淀的交互设计能力”。
           </div>
         </div>
       </header>
 
       <section id="problem">
-        <div class="section-no">01 / Problem</div>
+        <div class="section-no">01</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="clipboard" class="section-title-icon" aria-hidden="true"></i>我的真实问题：不是缺少知识点，而是缺少判别系统。</span></h2>
-          <p class="lead">工作里很多优化都很细：改流程、调布局、重排信息、补状态、改按钮。难点不是不会做，而是复盘时不知道这些动作背后体现了什么能力。</p>
+          <h2><span class="section-title"><i data-lucide="clipboard" class="section-title-icon" aria-hidden="true"></i>真实问题：缺少判别系统。</span></h2>
+          <p class="lead">难点不是不会优化，而是复盘时很难把细节动作归纳成稳定能力。</p>
           <div class="row-list">
             <div class="row-item">
               <div class="row-key">表层动作</div>
-              <div class="row-value">我调整了排版、按钮、提示、流程、规则说明。</div>
+              <div class="row-value">改排版、按钮、提示、流程、规则说明。</div>
             </div>
             <div class="row-item">
               <div class="row-key">复盘困境</div>
-              <div class="row-value">说出口容易变成“我改了页面”，听起来像执行细节，不像设计判断。</div>
+              <div class="row-value">说出来像“改页面”，不像设计判断。</div>
             </div>
             <div class="row-item">
               <div class="row-key">混淆原因</div>
-              <div class="row-value">同一个优化可能跨多层：既有信息组织，也有视觉层级；既有流程路径，也有操作入口。</div>
+              <div class="row-value">一个优化常跨多层：信息、布局、流程、操作会叠在一起。</div>
             </div>
             <div class="row-item emphasis">
               <div class="row-key">正确入口</div>
-              <div class="row-value"><strong>不要先背概念，先问用户真实卡在哪里。</strong>卡点找准了，能力分类才会稳定。</div>
+              <div class="row-value"><strong>先问用户真实卡在哪里。</strong>卡点找准，能力分类才稳定。</div>
             </div>
           </div>
         </div>
       </section>
 
       <section id="stuck">
-        <div class="section-no">02 / Stuck Point</div>
+        <div class="section-no">02</div>
         <div class="section-body">
           <h2><span class="section-title"><i data-lucide="map" class="section-title-icon" aria-hidden="true"></i>先问用户卡在哪里。</span></h2>
-          <p class="lead">把问题从“页面有什么不对”换成“用户在哪一步受阻”。这个转换会直接指向底层能力。</p>
+          <p class="lead">把“页面哪里不对”换成“用户在哪一步受阻”，能力分类就会更稳定。</p>
           <div class="stuck-map">
             <div class="stuck-row header">
               <div class="stuck-cell">用户卡点</div>
@@ -1458,10 +1529,10 @@
       </section>
 
       <section id="abilities">
-        <div class="section-no">03 / Abilities</div>
+        <div class="section-no">03</div>
         <div class="section-body">
           <h2><span class="section-title"><i data-lucide="layers" class="section-title-icon" aria-hidden="true"></i>六类底层设计能力。</span></h2>
-          <p class="lead">每个概念都用同一套格式记：专业说法保证准确，一句话记忆帮助你在项目里快速判断。</p>
+          <p class="lead">先记一句人话，再看专业定义、表现、动作和复盘表达。</p>
 
           <div class="ability-stack">
             <article class="ability-row">
@@ -1642,10 +1713,10 @@
       </section>
 
       <section id="boundaries">
-        <div class="section-no">04 / Boundaries</div>
+        <div class="section-no">04</div>
         <div class="section-body">
           <h2><span class="section-title"><i data-lucide="git-branch" class="section-title-icon" aria-hidden="true"></i>易混概念边界。</span></h2>
-          <p class="lead">真实项目里经常不是非此即彼，而是“先解决 A，再用 B 强化”。边界清楚，复盘表达就不会混。</p>
+          <p class="lead">真实项目常是跨层问题。先分清主问题，再表达辅助能力。</p>
 
           <div class="boundary-list">
             <article class="boundary-item">
@@ -1721,10 +1792,10 @@
       </section>
 
       <section id="translator">
-        <div class="section-no">05 / Translator</div>
+        <div class="section-no">05</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="wand" class="section-title-icon" aria-hidden="true"></i>复盘表达生成器：把你的真实优化翻译成专业说法。</span></h2>
-          <p class="lead">这是下一版的核心工作流。输入你做了什么，选择用户卡点，页面会生成一条可以放进周报、项目总结或作品集里的复盘表达。</p>
+          <h2><span class="section-title"><i data-lucide="wand" class="section-title-icon" aria-hidden="true"></i>复盘表达生成器。</span></h2>
+          <p class="lead">输入真实优化，选择用户卡点，生成一条可放进周报、总结或作品集的表达。</p>
 
           <div class="translator">
             <div class="translator-panel">
@@ -1795,10 +1866,10 @@
       </section>
 
       <section id="diagnoser">
-        <div class="section-no">06 / Diagnoser</div>
+        <div class="section-no">06</div>
         <div class="section-body">
           <h2><span class="section-title"><i data-lucide="search" class="section-title-icon" aria-hidden="true"></i>可交互判别器。</span></h2>
-          <p class="lead">点一个常见现象，右侧会给出完整诊断链路：表层现象、用户卡点、底层能力、设计动作、复盘表达。</p>
+          <p class="lead">点一个常见现象，直接得到一条完整诊断链路。</p>
 
           <div class="diagnoser">
             <div class="scenario-list" id="scenarioList" aria-label="常见问题列表"></div>
@@ -1840,10 +1911,10 @@
       </section>
 
       <section id="review">
-        <div class="section-no">07 / Review</div>
+        <div class="section-no">07</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="file-text" class="section-title-icon" aria-hidden="true"></i>项目复盘表达：把动作翻译成能力。</span></h2>
-          <p class="lead">复盘时不要只说“我改了什么”，要补上“用户卡在哪里、我用什么设计判断解决、结果降低了什么成本”。</p>
+          <h2><span class="section-title"><i data-lucide="file-text" class="section-title-icon" aria-hidden="true"></i>项目复盘表达。</span></h2>
+          <p class="lead">不要只说改了什么，要说用户卡点、设计判断和降低的成本。</p>
 
           <div class="translation-table">
             <div class="translation-row">
@@ -1901,10 +1972,10 @@
       </section>
 
       <section id="usage">
-        <div class="section-no">08 / Usage</div>
+        <div class="section-no">08</div>
         <div class="section-body">
           <h2><span class="section-title"><i data-lucide="list-check" class="section-title-icon" aria-hidden="true"></i>使用方法。</span></h2>
-          <p class="lead">这张图真正的用法，是让你在工作当下和项目复盘时都能稳定套用同一条判断链。</p>
+          <p class="lead">工作当下和项目复盘，都用同一条判断链。</p>
 
           <div class="usage-grid">
             <div class="usage-block">
@@ -1934,10 +2005,10 @@
       </section>
 
       <section id="product">
-        <div class="section-no">09 / Product</div>
+        <div class="section-no">09</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="boxes" class="section-title-icon" aria-hidden="true"></i>产品化方向：从方法页到复盘工作台。</span></h2>
-          <p class="lead">这个工具不适合做成百科。它更适合继续收敛为一个小而锋利的工作台：让设计师把真实项目里的细节优化沉淀成能力证据。</p>
+          <h2><span class="section-title"><i data-lucide="boxes" class="section-title-icon" aria-hidden="true"></i>产品化方向。</span></h2>
+          <p class="lead">它不该变成百科，更适合收敛成“案例沉淀 + 能力证据”的复盘工作台。</p>
 
           <div class="product-grid">
             <div class="product-row">
