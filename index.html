@@ -7,22 +7,22 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: oklch(97.2% 0.014 91);
-      --paper: oklch(99% 0.006 91);
-      --paper-2: oklch(95.2% 0.018 91);
-      --paper-3: oklch(92.6% 0.022 91);
-      --ink: oklch(21% 0.025 142);
-      --ink-2: oklch(33% 0.022 142);
-      --muted: oklch(47% 0.018 142);
-      --faint: oklch(62% 0.014 142);
-      --line: oklch(86.8% 0.018 91);
-      --line-strong: oklch(74.8% 0.022 91);
-      --accent: oklch(42% 0.085 166);
-      --accent-ink: oklch(31% 0.075 166);
-      --accent-soft: oklch(93.8% 0.035 166);
-      --mark: oklch(55% 0.095 70);
-      --mark-soft: oklch(94% 0.04 70);
-      --focus: oklch(68% 0.08 166);
+      --bg: oklch(97.8% 0 0);
+      --paper: oklch(99.2% 0 0);
+      --paper-2: oklch(95.2% 0 0);
+      --paper-3: oklch(91.8% 0 0);
+      --ink: oklch(18% 0 0);
+      --ink-2: oklch(31% 0 0);
+      --muted: oklch(46% 0 0);
+      --faint: oklch(63% 0 0);
+      --line: oklch(86.5% 0 0);
+      --line-strong: oklch(70% 0 0);
+      --accent: oklch(24% 0 0);
+      --accent-ink: oklch(16% 0 0);
+      --accent-soft: oklch(93.5% 0 0);
+      --mark: oklch(38% 0 0);
+      --mark-soft: oklch(95.5% 0 0);
+      --focus: oklch(52% 0 0);
       --radius: 6px;
       --space-1: 4px;
       --space-2: 8px;
@@ -173,6 +173,9 @@
     }
 
     .brand-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
       color: var(--accent-ink);
       margin-bottom: var(--space-2);
     }
@@ -200,7 +203,7 @@
 
     .nav a {
       display: grid;
-      grid-template-columns: 32px 1fr;
+      grid-template-columns: 20px 32px 1fr;
       align-items: start;
       gap: var(--space-2);
       min-height: 40px;
@@ -209,6 +212,23 @@
       color: var(--ink-2);
       font-size: var(--text-sm);
       line-height: 1.35;
+    }
+
+    .nav-icon,
+    .title-icon,
+    .button-icon,
+    .section-title-icon,
+    .field-icon,
+    .scenario-icon {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      color: var(--muted);
+      stroke-width: 1.8;
+    }
+
+    .nav-icon {
+      margin-top: 1px;
     }
 
     .nav a:hover,
@@ -221,13 +241,20 @@
       color: var(--accent-ink);
     }
 
+    .nav a.active .nav-icon,
+    .nav a:hover .nav-icon {
+      color: var(--ink);
+    }
+
     .shell.is-collapsed .brand {
       padding-bottom: var(--space-3);
     }
 
     .shell.is-collapsed .brand-title,
     .shell.is-collapsed .brand-text,
+    .shell.is-collapsed .brand-label-text,
     .shell.is-collapsed .nav-text,
+    .shell.is-collapsed .nav .meta,
     .shell.is-collapsed .sidebar-note {
       position: absolute;
       width: 1px;
@@ -260,7 +287,12 @@
     }
 
     .shell.is-collapsed .nav a.active {
-      box-shadow: inset 3px 0 0 var(--accent);
+      background: var(--accent);
+      color: var(--paper);
+    }
+
+    .shell.is-collapsed .nav a.active .nav-icon {
+      color: var(--paper);
     }
 
     .sidebar-note {
@@ -320,8 +352,8 @@
     }
 
     .value-line {
-      border-left: 3px solid var(--mark);
-      padding-left: var(--space-4);
+      border-top: 1px solid var(--line-strong);
+      padding-top: var(--space-3);
       color: var(--ink-2);
       font-size: var(--text-sm);
       line-height: 1.65;
@@ -357,6 +389,19 @@
       font-size: var(--text-xl);
       line-height: 1.25;
       font-weight: 760;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .section-title-icon {
+      width: 22px;
+      height: 22px;
+      margin-top: 4px;
+      color: var(--ink);
     }
 
     .lead {
@@ -465,6 +510,9 @@
       font-size: 19px;
       line-height: 1.3;
       font-weight: 760;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
     }
 
     .ability-title p {
@@ -499,6 +547,9 @@
     }
 
     .field-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       margin-bottom: 8px;
     }
 
@@ -535,6 +586,9 @@
       margin: 0;
       font-size: 18px;
       line-height: 1.35;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
     }
 
     .boundary-title p {
@@ -618,6 +672,9 @@
       margin: 0;
       font-size: 18px;
       line-height: 1.35;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
     }
 
     .translator-head p {
@@ -694,6 +751,9 @@
     }
 
     .choice-button {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
       min-height: 42px;
       padding: 9px 10px;
       font-size: 13px;
@@ -710,7 +770,13 @@
     }
 
     .choice-button.active {
-      box-shadow: inset 3px 0 0 var(--accent);
+      background: var(--paper-3);
+      border-color: var(--line-strong);
+      color: var(--ink);
+    }
+
+    .choice-button .button-icon {
+      margin-top: 2px;
     }
 
     .example-row {
@@ -739,11 +805,18 @@
       padding: 8px 12px;
       font-weight: 680;
       font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
     }
 
     .action-button.primary {
       background: var(--accent);
       border-color: var(--accent);
+      color: var(--paper);
+    }
+
+    .action-button.primary .button-icon {
       color: var(--paper);
     }
 
@@ -812,10 +885,10 @@
       appearance: none;
       width: 100%;
       display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
-      gap: 10px;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 12px;
       align-items: start;
-      padding: 14px 12px;
+      padding: 14px;
       border: 0;
       border-bottom: 1px solid var(--line);
       background: transparent;
@@ -831,7 +904,14 @@
 
     .scenario-button.active {
       background: var(--accent-soft);
-      box-shadow: inset 3px 0 0 var(--accent);
+      box-shadow: inset 0 0 0 1px var(--line-strong);
+    }
+
+    .scenario-mark {
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      padding-top: 1px;
     }
 
     .scenario-button:focus-visible,
@@ -845,8 +925,12 @@
     }
 
     .scenario-index {
-      padding-top: 2px;
       color: var(--faint);
+    }
+
+    .scenario-button.active .scenario-icon,
+    .scenario-button:hover .scenario-icon {
+      color: var(--ink);
     }
 
     .scenario-name {
@@ -884,6 +968,9 @@
       font-size: 22px;
       line-height: 1.35;
       font-weight: 760;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
     }
 
     .ability-badge {
@@ -994,6 +1081,9 @@
       margin: 0 0 14px;
       font-size: 18px;
       line-height: 1.35;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
     }
 
     .step-list {
@@ -1101,6 +1191,7 @@
       .shell.is-collapsed .brand-label,
       .shell.is-collapsed .brand-title,
       .shell.is-collapsed .brand-text,
+      .shell.is-collapsed .brand-label-text,
       .shell.is-collapsed .toggle-label {
         position: static;
         width: auto;
@@ -1111,7 +1202,7 @@
       }
 
       .shell.is-collapsed .brand-label {
-        display: block;
+        display: inline-flex;
         margin: 0 0 var(--space-2);
         border: 0;
         border-radius: 0;
@@ -1244,25 +1335,25 @@
     <aside class="sidebar" id="sidebar">
       <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-controls="sidebarBody" aria-expanded="true">
         <span class="toggle-label">收起目录</span>
-        <span class="toggle-icon" aria-hidden="true">‹</span>
+        <span class="toggle-icon" aria-hidden="true"><i data-lucide="panel-left-close" class="button-icon"></i></span>
       </button>
       <div class="brand">
-        <div class="brand-label">交互设计能力判别图</div>
+        <div class="brand-label"><i data-lucide="book-open" class="title-icon" aria-hidden="true"></i><span class="brand-label-text">交互设计能力判别图</span></div>
         <h2 class="brand-title">从零散优化到可复盘能力</h2>
         <p class="brand-text">先判断用户卡在哪里，再把具体改动翻译成底层设计能力。</p>
       </div>
 
       <div class="sidebar-body" id="sidebarBody">
         <nav class="nav" id="nav" aria-label="页面目录">
-          <a href="#problem" title="我的真实问题"><span class="meta">01</span><span class="nav-text">我的真实问题</span></a>
-          <a href="#stuck" title="先问用户卡在哪里"><span class="meta">02</span><span class="nav-text">先问用户卡在哪里</span></a>
-          <a href="#abilities" title="六类底层设计能力"><span class="meta">03</span><span class="nav-text">六类底层设计能力</span></a>
-          <a href="#boundaries" title="易混概念边界"><span class="meta">04</span><span class="nav-text">易混概念边界</span></a>
-          <a href="#translator" title="复盘表达生成器"><span class="meta">05</span><span class="nav-text">复盘表达生成器</span></a>
-          <a href="#diagnoser" title="可交互判别器"><span class="meta">06</span><span class="nav-text">可交互判别器</span></a>
-          <a href="#review" title="项目复盘表达"><span class="meta">07</span><span class="nav-text">项目复盘表达</span></a>
-          <a href="#usage" title="使用方法"><span class="meta">08</span><span class="nav-text">使用方法</span></a>
-          <a href="#product" title="产品化方向"><span class="meta">09</span><span class="nav-text">产品化方向</span></a>
+          <a href="#problem" title="我的真实问题"><i data-lucide="clipboard" class="nav-icon" aria-hidden="true"></i><span class="meta">01</span><span class="nav-text">我的真实问题</span></a>
+          <a href="#stuck" title="先问用户卡在哪里"><i data-lucide="map" class="nav-icon" aria-hidden="true"></i><span class="meta">02</span><span class="nav-text">先问用户卡在哪里</span></a>
+          <a href="#abilities" title="六类底层设计能力"><i data-lucide="layers" class="nav-icon" aria-hidden="true"></i><span class="meta">03</span><span class="nav-text">六类底层设计能力</span></a>
+          <a href="#boundaries" title="易混概念边界"><i data-lucide="git-branch" class="nav-icon" aria-hidden="true"></i><span class="meta">04</span><span class="nav-text">易混概念边界</span></a>
+          <a href="#translator" title="复盘表达生成器"><i data-lucide="wand" class="nav-icon" aria-hidden="true"></i><span class="meta">05</span><span class="nav-text">复盘表达生成器</span></a>
+          <a href="#diagnoser" title="可交互判别器"><i data-lucide="search" class="nav-icon" aria-hidden="true"></i><span class="meta">06</span><span class="nav-text">可交互判别器</span></a>
+          <a href="#review" title="项目复盘表达"><i data-lucide="file-text" class="nav-icon" aria-hidden="true"></i><span class="meta">07</span><span class="nav-text">项目复盘表达</span></a>
+          <a href="#usage" title="使用方法"><i data-lucide="list-check" class="nav-icon" aria-hidden="true"></i><span class="meta">08</span><span class="nav-text">使用方法</span></a>
+          <a href="#product" title="产品化方向"><i data-lucide="boxes" class="nav-icon" aria-hidden="true"></i><span class="meta">09</span><span class="nav-text">产品化方向</span></a>
         </nav>
 
         <div class="sidebar-note">
@@ -1291,7 +1382,7 @@
       <section id="problem">
         <div class="section-no">01 / Problem</div>
         <div class="section-body">
-          <h2>我的真实问题：不是缺少知识点，而是缺少判别系统。</h2>
+          <h2><span class="section-title"><i data-lucide="clipboard" class="section-title-icon" aria-hidden="true"></i>我的真实问题：不是缺少知识点，而是缺少判别系统。</span></h2>
           <p class="lead">工作里很多优化都很细：改流程、调布局、重排信息、补状态、改按钮。难点不是不会做，而是复盘时不知道这些动作背后体现了什么能力。</p>
           <div class="row-list">
             <div class="row-item">
@@ -1317,7 +1408,7 @@
       <section id="stuck">
         <div class="section-no">02 / Stuck Point</div>
         <div class="section-body">
-          <h2>先问用户卡在哪里。</h2>
+          <h2><span class="section-title"><i data-lucide="map" class="section-title-icon" aria-hidden="true"></i>先问用户卡在哪里。</span></h2>
           <p class="lead">把问题从“页面有什么不对”换成“用户在哪一步受阻”。这个转换会直接指向底层能力。</p>
           <div class="stuck-map">
             <div class="stuck-row header">
@@ -1369,13 +1460,13 @@
       <section id="abilities">
         <div class="section-no">03 / Abilities</div>
         <div class="section-body">
-          <h2>六类底层设计能力。</h2>
+          <h2><span class="section-title"><i data-lucide="layers" class="section-title-icon" aria-hidden="true"></i>六类底层设计能力。</span></h2>
           <p class="lead">每个概念都用同一套格式记：专业说法保证准确，一句话记忆帮助你在项目里快速判断。</p>
 
           <div class="ability-stack">
             <article class="ability-row">
               <div class="ability-title">
-                <h3>流程路径设计</h3>
+                <h3><i data-lucide="route" class="title-icon" aria-hidden="true"></i>流程路径设计</h3>
                 <p>路怎么走得顺。</p>
               </div>
               <div class="ability-fields">
@@ -1404,7 +1495,7 @@
 
             <article class="ability-row">
               <div class="ability-title">
-                <h3>信息架构</h3>
+                <h3><i data-lucide="network" class="title-icon" aria-hidden="true"></i>信息架构</h3>
                 <p>东西怎么分，谁先谁后。</p>
               </div>
               <div class="ability-fields">
@@ -1433,7 +1524,7 @@
 
             <article class="ability-row">
               <div class="ability-title">
-                <h3>页面布局 / 视觉层级</h3>
+                <h3><i data-lucide="layout" class="title-icon" aria-hidden="true"></i>页面布局 / 视觉层级</h3>
                 <p>已经分好的信息怎么摆。</p>
               </div>
               <div class="ability-fields">
@@ -1462,7 +1553,7 @@
 
             <article class="ability-row">
               <div class="ability-title">
-                <h3>操作控件设计</h3>
+                <h3><i data-lucide="mouse-pointer" class="title-icon" aria-hidden="true"></i>操作控件设计</h3>
                 <p>怎么点、选、填最省力。</p>
               </div>
               <div class="ability-fields">
@@ -1491,7 +1582,7 @@
 
             <article class="ability-row">
               <div class="ability-title">
-                <h3>状态反馈</h3>
+                <h3><i data-lucide="radio" class="title-icon" aria-hidden="true"></i>状态反馈</h3>
                 <p>系统有没有把话说清楚。</p>
               </div>
               <div class="ability-fields">
@@ -1520,7 +1611,7 @@
 
             <article class="ability-row">
               <div class="ability-title">
-                <h3>规则逻辑</h3>
+                <h3><i data-lucide="shield" class="title-icon" aria-hidden="true"></i>规则逻辑</h3>
                 <p>什么情况下能不能做。</p>
               </div>
               <div class="ability-fields">
@@ -1553,13 +1644,13 @@
       <section id="boundaries">
         <div class="section-no">04 / Boundaries</div>
         <div class="section-body">
-          <h2>易混概念边界。</h2>
+          <h2><span class="section-title"><i data-lucide="git-branch" class="section-title-icon" aria-hidden="true"></i>易混概念边界。</span></h2>
           <p class="lead">真实项目里经常不是非此即彼，而是“先解决 A，再用 B 强化”。边界清楚，复盘表达就不会混。</p>
 
           <div class="boundary-list">
             <article class="boundary-item">
               <div class="boundary-title">
-                <h3>信息架构 vs 页面布局</h3>
+                <h3><i data-lucide="columns-2" class="title-icon" aria-hidden="true"></i>信息架构 vs 页面布局</h3>
                 <p>一个决定信息关系，一个决定视觉呈现。</p>
               </div>
               <div class="boundary-content">
@@ -1582,7 +1673,7 @@
 
             <article class="boundary-item">
               <div class="boundary-title">
-                <h3>流程优化 vs 操作设计</h3>
+                <h3><i data-lucide="workflow" class="title-icon" aria-hidden="true"></i>流程优化 vs 操作设计</h3>
                 <p>一个看整条路，一个看某一步怎么做。</p>
               </div>
               <div class="boundary-content">
@@ -1605,7 +1696,7 @@
 
             <article class="boundary-item">
               <div class="boundary-title">
-                <h3>规则逻辑 vs 状态反馈</h3>
+                <h3><i data-lucide="circle-alert" class="title-icon" aria-hidden="true"></i>规则逻辑 vs 状态反馈</h3>
                 <p>一个定义条件，一个解释结果和原因。</p>
               </div>
               <div class="boundary-content">
@@ -1632,13 +1723,13 @@
       <section id="translator">
         <div class="section-no">05 / Translator</div>
         <div class="section-body">
-          <h2>复盘表达生成器：把你的真实优化翻译成专业说法。</h2>
+          <h2><span class="section-title"><i data-lucide="wand" class="section-title-icon" aria-hidden="true"></i>复盘表达生成器：把你的真实优化翻译成专业说法。</span></h2>
           <p class="lead">这是下一版的核心工作流。输入你做了什么，选择用户卡点，页面会生成一条可以放进周报、项目总结或作品集里的复盘表达。</p>
 
           <div class="translator">
             <div class="translator-panel">
               <div class="translator-head">
-                <h3>输入你的优化</h3>
+                <h3><i data-lucide="pencil" class="title-icon" aria-hidden="true"></i>输入你的优化</h3>
                 <p>不用写得漂亮，像平时复盘草稿一样写就行。</p>
               </div>
               <div class="form-stack">
@@ -1661,15 +1752,15 @@
                   <div class="example-row" id="translatorExamples"></div>
                 </div>
                 <div class="translator-actions">
-                  <button class="action-button primary" type="button" id="generateStatement">生成复盘表达</button>
-                  <button class="action-button" type="button" id="resetStatement">恢复示例</button>
+                  <button class="action-button primary" type="button" id="generateStatement"><i data-lucide="wand" class="button-icon" aria-hidden="true"></i>生成复盘表达</button>
+                  <button class="action-button" type="button" id="resetStatement"><i data-lucide="rotate-ccw" class="button-icon" aria-hidden="true"></i>恢复示例</button>
                 </div>
               </div>
             </div>
 
             <article class="translator-result" aria-live="polite">
               <div class="translator-head">
-                <h3>生成结果</h3>
+                <h3><i data-lucide="file-check" class="title-icon" aria-hidden="true"></i>生成结果</h3>
                 <p>先看归类是否准确，再拿表达去改成你的项目语境。</p>
               </div>
               <div class="result-grid">
@@ -1695,7 +1786,7 @@
                 </div>
               </div>
               <div class="copy-row">
-                <button class="action-button" type="button" id="copyReview">复制 Markdown</button>
+                <button class="action-button" type="button" id="copyReview"><i data-lucide="copy" class="button-icon" aria-hidden="true"></i>复制 Markdown</button>
                 <span class="copy-status" id="copyStatus">生成后可以复制到周报、作品集或项目复盘里。</span>
               </div>
             </article>
@@ -1706,7 +1797,7 @@
       <section id="diagnoser">
         <div class="section-no">06 / Diagnoser</div>
         <div class="section-body">
-          <h2>可交互判别器。</h2>
+          <h2><span class="section-title"><i data-lucide="search" class="section-title-icon" aria-hidden="true"></i>可交互判别器。</span></h2>
           <p class="lead">点一个常见现象，右侧会给出完整诊断链路：表层现象、用户卡点、底层能力、设计动作、复盘表达。</p>
 
           <div class="diagnoser">
@@ -1714,7 +1805,7 @@
 
             <article class="diagnosis" aria-live="polite">
               <div class="diagnosis-head">
-                <h3 id="scenarioTitle">页面很乱，用户找不到重点</h3>
+                <h3><i data-lucide="search" class="title-icon" aria-hidden="true"></i><span id="scenarioTitle">页面很乱，用户找不到重点</span></h3>
                 <span class="ability-badge" id="abilityBadge">信息架构 + 页面布局</span>
               </div>
               <div class="diagnosis-flow">
@@ -1751,7 +1842,7 @@
       <section id="review">
         <div class="section-no">07 / Review</div>
         <div class="section-body">
-          <h2>项目复盘表达：把动作翻译成能力。</h2>
+          <h2><span class="section-title"><i data-lucide="file-text" class="section-title-icon" aria-hidden="true"></i>项目复盘表达：把动作翻译成能力。</span></h2>
           <p class="lead">复盘时不要只说“我改了什么”，要补上“用户卡在哪里、我用什么设计判断解决、结果降低了什么成本”。</p>
 
           <div class="translation-table">
@@ -1812,12 +1903,12 @@
       <section id="usage">
         <div class="section-no">08 / Usage</div>
         <div class="section-body">
-          <h2>使用方法。</h2>
+          <h2><span class="section-title"><i data-lucide="list-check" class="section-title-icon" aria-hidden="true"></i>使用方法。</span></h2>
           <p class="lead">这张图真正的用法，是让你在工作当下和项目复盘时都能稳定套用同一条判断链。</p>
 
           <div class="usage-grid">
             <div class="usage-block">
-              <h3>遇到优化需求时</h3>
+              <h3><i data-lucide="play" class="title-icon" aria-hidden="true"></i>遇到优化需求时</h3>
               <ol class="step-list">
                 <li>先写下表层现象：页面乱、流程长、按钮弱、提示少、规则不清。</li>
                 <li>追问用户真实卡点：卡在路径、理解、扫读、操作、反馈还是规则。</li>
@@ -1826,7 +1917,7 @@
               </ol>
             </div>
             <div class="usage-block">
-              <h3>做项目复盘时</h3>
+              <h3><i data-lucide="file-check" class="title-icon" aria-hidden="true"></i>做项目复盘时</h3>
               <ol class="step-list">
                 <li>不要从“我改了什么样式”开始，先说用户遇到的阻力。</li>
                 <li>说明这个阻力对应哪类交互问题，必要时讲清跨层关系。</li>
@@ -1845,7 +1936,7 @@
       <section id="product">
         <div class="section-no">09 / Product</div>
         <div class="section-body">
-          <h2>产品化方向：从方法页到复盘工作台。</h2>
+          <h2><span class="section-title"><i data-lucide="boxes" class="section-title-icon" aria-hidden="true"></i>产品化方向：从方法页到复盘工作台。</span></h2>
           <p class="lead">这个工具不适合做成百科。它更适合继续收敛为一个小而锋利的工作台：让设计师把真实项目里的细节优化沉淀成能力证据。</p>
 
           <div class="product-grid">
@@ -1875,9 +1966,20 @@
     </main>
   </div>
 
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>
+    function renderIcons() {
+      if (!window.lucide) return;
+      window.lucide.createIcons({
+        attrs: {
+          "aria-hidden": "true"
+        }
+      });
+    }
+
     const scenarios = [
       {
+        icon: "layout",
         title: "页面很乱，用户找不到重点",
         badge: "信息架构 + 页面布局",
         surface: "页面信息很多，模块都在，但用户扫一眼不知道先看哪里。",
@@ -1891,6 +1993,7 @@
         statement: "这个优化表面上是页面排版调整，但真实问题是用户无法快速建立信息优先级。我先重组了信息架构，明确主信息、辅助信息和操作信息，再通过页面布局强化视觉层级，从而降低用户的扫描和判断成本。"
       },
       {
+        icon: "route",
         title: "流程步骤太多，用户总是来回跳转",
         badge: "流程路径设计",
         surface: "用户需要经过多个页面、重复确认或返回查找信息，任务完成路径很长。",
@@ -1904,6 +2007,7 @@
         statement: "这个优化的核心不是单页视觉，而是任务流程阻力。原流程存在多次跳转和重复判断，我通过合并低价值步骤、前置关键判断、减少中断路径，降低了用户完成任务的路径成本。"
       },
       {
+        icon: "mouse-pointer",
         title: "按钮不明显，用户不知道该点哪里",
         badge: "操作控件设计",
         surface: "关键操作入口不明显，主次按钮竞争，或者高频操作被藏得太深。",
@@ -1917,6 +2021,7 @@
         statement: "这个问题的核心是操作入口和操作权重不清。我根据操作频率与风险等级，重新分配主次操作，将高频操作前置，将低频或高风险操作收纳，并补充确认机制，降低用户寻找成本和误操作风险。"
       },
       {
+        icon: "radio",
         title: "用户不知道操作成功没有",
         badge: "状态反馈",
         surface: "点击后没有明显反馈，加载、成功、失败、禁用原因不清楚。",
@@ -1930,6 +2035,7 @@
         statement: "这个优化的核心是补足状态反馈。原方案只覆盖正常页面，没有清晰表达加载、失败、禁用和成功后的状态。我补充了关键状态和恢复路径，提升用户对系统结果的确定感。"
       },
       {
+        icon: "shield",
         title: "有些情况下不能操作，但用户不知道为什么",
         badge: "规则逻辑 + 状态反馈",
         surface: "同一个按钮在不同状态下有时可用、有时置灰、有时消失，但原因不清楚。",
@@ -1943,6 +2049,7 @@
         statement: "这个问题的根因不是按钮样式，而是业务规则和权限逻辑没有被清晰表达。我梳理了不同角色和对象状态下的可见、可用、禁用规则，并通过状态提示解释限制原因，减少用户对系统规则的猜测。"
       },
       {
+        icon: "list",
         title: "列表信息很多，用户扫得很慢",
         badge: "信息架构 + 页面布局",
         surface: "列表项信息密度高，字段都重要，但用户无法快速比较和定位。",
@@ -1956,6 +2063,7 @@
         statement: "这个优化不是单纯美化列表，而是提升批量扫描效率。我先区分识别信息、判断信息和操作信息，再通过固定字段位置、统一对齐和强化关键状态，降低用户在列表中的比较成本。"
       },
       {
+        icon: "square-pen",
         title: "表单总是填错，用户反复返工",
         badge: "操作控件设计 + 状态反馈",
         surface: "输入字段多，格式要求隐藏，错误提示滞后，用户提交后才发现问题。",
@@ -2013,9 +2121,18 @@
       button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
       if (index === 0) button.classList.add("active");
 
+      const mark = document.createElement("span");
+      mark.className = "scenario-mark";
+
+      const icon = document.createElement("i");
+      icon.className = "scenario-icon";
+      icon.setAttribute("data-lucide", item.icon);
+      icon.setAttribute("aria-hidden", "true");
+
       const number = document.createElement("span");
       number.className = "scenario-index";
       number.textContent = String(index + 1).padStart(2, "0");
+      mark.append(icon, number);
 
       const content = document.createElement("span");
       const name = document.createElement("span");
@@ -2026,7 +2143,7 @@
       ability.textContent = item.badge;
 
       content.append(name, ability);
-      button.append(number, content);
+      button.append(mark, content);
       button.addEventListener("click", () => renderScenario(index));
       return button;
     }
@@ -2037,6 +2154,7 @@
 
     const abilityProfiles = {
       path: {
+        icon: "route",
         label: "路径卡住",
         primary: "流程路径设计",
         secondary: "操作控件设计",
@@ -2045,6 +2163,7 @@
         fallbackStuck: "用户完成任务时路径过长，需要反复跳转和确认。"
       },
       understanding: {
+        icon: "network",
         label: "理解卡住",
         primary: "信息架构",
         secondary: "页面布局 / 视觉层级",
@@ -2053,6 +2172,7 @@
         fallbackStuck: "用户看得到信息，但无法快速理解信息之间的关系和优先级。"
       },
       scanning: {
+        icon: "layout",
         label: "扫读卡住",
         primary: "页面布局 / 视觉层级",
         secondary: "信息架构",
@@ -2061,6 +2181,7 @@
         fallbackStuck: "用户需要反复阅读页面或列表，才能判断重点和差异。"
       },
       action: {
+        icon: "mouse-pointer",
         label: "操作卡住",
         primary: "操作控件设计",
         secondary: "流程路径设计",
@@ -2069,6 +2190,7 @@
         fallbackStuck: "用户知道自己想做什么，但不知道应该点哪里、怎么选或怎么确认。"
       },
       feedback: {
+        icon: "radio",
         label: "反馈卡住",
         primary: "状态反馈",
         secondary: "规则逻辑",
@@ -2077,6 +2199,7 @@
         fallbackStuck: "用户操作后不知道系统有没有收到，也不知道失败原因和下一步。"
       },
       rule: {
+        icon: "shield",
         label: "规则卡住",
         primary: "规则逻辑",
         secondary: "状态反馈",
@@ -2180,7 +2303,13 @@
       button.type = "button";
       button.dataset.type = type;
       button.setAttribute("aria-pressed", String(type === translatorState.type));
-      button.textContent = `${profile.label} / ${profile.primary}`;
+      const icon = document.createElement("i");
+      icon.className = "button-icon";
+      icon.setAttribute("data-lucide", profile.icon);
+      icon.setAttribute("aria-hidden", "true");
+      const text = document.createElement("span");
+      text.textContent = `${profile.label} / ${profile.primary}`;
+      button.append(icon, text);
       button.addEventListener("click", () => {
         translatorState.type = type;
         renderTranslator();
@@ -2261,14 +2390,19 @@
       if (shouldPersist) saveSidebarState(isCollapsed);
     }
 
-    const savedSidebarState = readSavedSidebarState();
-    setSidebarCollapsed(
-      savedSidebarState === null ? compactNavQuery.matches : savedSidebarState === "true",
-      false
-    );
+    function syncSidebarForViewport(matchesCompact) {
+      const savedSidebarState = readSavedSidebarState();
+      setSidebarCollapsed(matchesCompact ? true : savedSidebarState === "true", false);
+    }
+
+    syncSidebarForViewport(compactNavQuery.matches);
 
     sidebarToggle.addEventListener("click", () => {
-      setSidebarCollapsed(!shell.classList.contains("is-collapsed"));
+      setSidebarCollapsed(!shell.classList.contains("is-collapsed"), !compactNavQuery.matches);
+    });
+
+    compactNavQuery.addEventListener("change", (event) => {
+      syncSidebarForViewport(event.matches);
     });
 
     const navLinks = Array.from(document.querySelectorAll(".nav a"));
@@ -2278,7 +2412,7 @@
 
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
-        if (compactNavQuery.matches) setSidebarCollapsed(true);
+        if (compactNavQuery.matches) setSidebarCollapsed(true, false);
       });
     });
 
@@ -2299,6 +2433,7 @@
     }, { rootMargin: "-25% 0px -65% 0px", threshold: 0 });
 
     sections.forEach((section) => observer.observe(section));
+    renderIcons();
   </script>
 </body>
 </html>
