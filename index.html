@@ -6,20 +6,40 @@
   <title>交互设计能力判别图｜实战版</title>
   <style>
     :root {
-      --bg: #f7f6f1;
-      --paper: #fbfaf6;
-      --paper-2: #f1efe7;
-      --ink: #20231f;
-      --ink-2: #3a3f39;
-      --muted: #686d66;
-      --faint: #8b8e87;
-      --line: #d9d5c9;
-      --line-strong: #bdb8aa;
-      --accent: #2f6b5d;
-      --accent-ink: #1f4d43;
-      --accent-soft: #e6eee9;
-      --focus: #8fb9a8;
+      color-scheme: light;
+      --bg: oklch(97.2% 0.014 91);
+      --paper: oklch(99% 0.006 91);
+      --paper-2: oklch(95.2% 0.018 91);
+      --paper-3: oklch(92.6% 0.022 91);
+      --ink: oklch(21% 0.025 142);
+      --ink-2: oklch(33% 0.022 142);
+      --muted: oklch(47% 0.018 142);
+      --faint: oklch(62% 0.014 142);
+      --line: oklch(86.8% 0.018 91);
+      --line-strong: oklch(74.8% 0.022 91);
+      --accent: oklch(42% 0.085 166);
+      --accent-ink: oklch(31% 0.075 166);
+      --accent-soft: oklch(93.8% 0.035 166);
+      --mark: oklch(55% 0.095 70);
+      --mark-soft: oklch(94% 0.04 70);
+      --focus: oklch(68% 0.08 166);
       --radius: 6px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+      --text-xs: .75rem;
+      --text-sm: .875rem;
+      --text-md: 1rem;
+      --text-lg: 1.25rem;
+      --text-xl: 1.625rem;
+      --text-xxl: 2.5rem;
+      --sidebar-expanded: 292px;
+      --sidebar-collapsed: 72px;
       --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
       --mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     }
@@ -37,11 +57,12 @@
       background: var(--bg);
       color: var(--ink);
       font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.65;
+      font-size: var(--text-md);
+      line-height: 1.6;
       letter-spacing: 0;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      font-kerning: normal;
     }
 
     a {
@@ -55,8 +76,13 @@
 
     .shell {
       display: grid;
-      grid-template-columns: 276px minmax(0, 1fr);
+      grid-template-columns: var(--sidebar-expanded) minmax(0, 1fr);
       min-height: 100vh;
+      transition: grid-template-columns 180ms ease;
+    }
+
+    .shell.is-collapsed {
+      grid-template-columns: var(--sidebar-collapsed) minmax(0, 1fr);
     }
 
     .sidebar {
@@ -65,12 +91,69 @@
       height: 100vh;
       border-right: 1px solid var(--line);
       background: var(--paper);
-      padding: 26px 20px;
+      padding: var(--space-4);
       overflow: auto;
+      z-index: 5;
+    }
+
+    .sidebar-toggle {
+      appearance: none;
+      width: 100%;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      margin: 0 0 var(--space-4);
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-2);
+      color: var(--ink-2);
+      cursor: pointer;
+      text-align: left;
+      font-size: var(--text-sm);
+      font-weight: 680;
+    }
+
+    .sidebar-toggle:hover {
+      background: var(--accent-soft);
+      border-color: var(--focus);
+      color: var(--ink);
+    }
+
+    .toggle-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      color: var(--accent-ink);
+      font-family: var(--mono);
+      font-size: var(--text-sm);
+      line-height: 1;
+      transition: transform 180ms ease;
+    }
+
+    .shell.is-collapsed .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .shell.is-collapsed .sidebar-toggle {
+      justify-content: center;
+      padding-inline: 0;
+    }
+
+    .shell.is-collapsed .toggle-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
 
     .brand {
-      padding-bottom: 20px;
+      padding-bottom: var(--space-4);
       border-bottom: 1px solid var(--line);
     }
 
@@ -82,47 +165,49 @@
     .scenario-index,
     .tiny-label {
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: var(--text-xs);
       line-height: 1.4;
       letter-spacing: 0;
       color: var(--faint);
+      font-variant-numeric: tabular-nums;
     }
 
     .brand-label {
       color: var(--accent-ink);
-      margin-bottom: 8px;
+      margin-bottom: var(--space-2);
     }
 
     .brand-title {
       margin: 0;
-      font-size: 21px;
+      font-size: var(--text-lg);
       line-height: 1.25;
       font-weight: 760;
       letter-spacing: 0;
     }
 
     .brand-text {
-      margin: 10px 0 0;
+      margin: var(--space-2) 0 0;
       color: var(--muted);
-      font-size: 13px;
+      font-size: var(--text-sm);
       line-height: 1.55;
     }
 
     .nav {
       display: grid;
-      gap: 2px;
-      padding: 18px 0 16px;
+      gap: var(--space-1);
+      padding: var(--space-4) 0;
     }
 
     .nav a {
       display: grid;
-      grid-template-columns: 30px 1fr;
+      grid-template-columns: 32px 1fr;
       align-items: start;
-      gap: 8px;
-      padding: 8px 9px;
+      gap: var(--space-2);
+      min-height: 40px;
+      padding: var(--space-2) var(--space-2);
       border-radius: var(--radius);
       color: var(--ink-2);
-      font-size: 14px;
+      font-size: var(--text-sm);
       line-height: 1.35;
     }
 
@@ -136,36 +221,78 @@
       color: var(--accent-ink);
     }
 
+    .shell.is-collapsed .brand {
+      padding-bottom: var(--space-3);
+    }
+
+    .shell.is-collapsed .brand-title,
+    .shell.is-collapsed .brand-text,
+    .shell.is-collapsed .nav-text,
+    .shell.is-collapsed .sidebar-note {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .shell.is-collapsed .brand-label {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-2);
+      color: var(--accent-ink);
+    }
+
+    .shell.is-collapsed .nav {
+      padding-top: var(--space-3);
+    }
+
+    .shell.is-collapsed .nav a {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      padding: var(--space-2) 0;
+    }
+
+    .shell.is-collapsed .nav a.active {
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
     .sidebar-note {
       border-top: 1px solid var(--line);
-      padding-top: 14px;
+      padding-top: var(--space-3);
       color: var(--muted);
-      font-size: 13px;
+      font-size: var(--text-sm);
       line-height: 1.55;
     }
 
     main {
       width: 100%;
-      max-width: 1180px;
-      padding: 34px 46px 80px;
+      max-width: 1160px;
+      padding: var(--space-6) var(--space-7) var(--space-8);
     }
 
     .doc-intro {
-      padding: 16px 0 34px;
+      padding: var(--space-4) 0 var(--space-6);
       border-bottom: 1px solid var(--line-strong);
     }
 
     .doc-intro-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 320px;
-      gap: 40px;
+      gap: var(--space-7);
       align-items: end;
     }
 
     .eyebrow {
-      margin: 0 0 10px;
+      margin: 0 0 var(--space-2);
       color: var(--accent-ink);
-      font-size: 13px;
+      font-size: var(--text-sm);
       font-weight: 650;
     }
 
@@ -179,39 +306,39 @@
     h1 {
       margin: 0;
       max-width: 760px;
-      font-size: 42px;
-      line-height: 1.12;
+      font-size: var(--text-xxl);
+      line-height: 1.15;
       font-weight: 780;
     }
 
     .intro-text {
-      max-width: 760px;
-      margin: 18px 0 0;
+      max-width: 68ch;
+      margin: var(--space-4) 0 0;
       color: var(--ink-2);
-      font-size: 17px;
+      font-size: var(--text-md);
       line-height: 1.75;
     }
 
     .value-line {
-      border-left: 3px solid var(--accent);
-      padding-left: 16px;
+      border-left: 3px solid var(--mark);
+      padding-left: var(--space-4);
       color: var(--ink-2);
-      font-size: 15px;
+      font-size: var(--text-sm);
       line-height: 1.65;
     }
 
     .value-line strong {
       display: block;
       color: var(--ink);
-      font-size: 16px;
-      margin-bottom: 6px;
+      font-size: var(--text-md);
+      margin-bottom: var(--space-2);
     }
 
     section {
       display: grid;
-      grid-template-columns: 156px minmax(0, 1fr);
-      gap: 28px;
-      padding: 42px 0;
+      grid-template-columns: 148px minmax(0, 1fr);
+      gap: var(--space-6);
+      padding: var(--space-7) 0;
       border-bottom: 1px solid var(--line);
       scroll-margin-top: 24px;
     }
@@ -227,16 +354,16 @@
 
     h2 {
       margin: 0;
-      font-size: 28px;
+      font-size: var(--text-xl);
       line-height: 1.25;
       font-weight: 760;
     }
 
     .lead {
-      max-width: 780px;
-      margin: 10px 0 24px;
+      max-width: 72ch;
+      margin: var(--space-2) 0 var(--space-5);
       color: var(--muted);
-      font-size: 15px;
+      font-size: var(--text-sm);
     }
 
     .row-list {
@@ -708,6 +835,10 @@
     }
 
     .scenario-button:focus-visible,
+    .choice-button:focus-visible,
+    .example-button:focus-visible,
+    .action-button:focus-visible,
+    .sidebar-toggle:focus-visible,
     .nav a:focus-visible {
       outline: 2px solid var(--focus);
       outline-offset: 2px;
@@ -945,19 +1076,64 @@
         grid-template-columns: 1fr;
       }
 
+      .shell.is-collapsed {
+        grid-template-columns: 1fr;
+      }
+
       .sidebar {
         position: relative;
         height: auto;
         border-right: 0;
         border-bottom: 1px solid var(--line);
+        padding: var(--space-3) var(--space-4);
+      }
+
+      .sidebar-toggle {
+        width: auto;
+        min-width: 128px;
+        margin-bottom: var(--space-3);
+      }
+
+      .brand {
+        padding-bottom: var(--space-3);
+      }
+
+      .shell.is-collapsed .brand-label,
+      .shell.is-collapsed .brand-title,
+      .shell.is-collapsed .brand-text,
+      .shell.is-collapsed .toggle-label {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+      }
+
+      .shell.is-collapsed .brand-label {
+        display: block;
+        margin: 0 0 var(--space-2);
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+      }
+
+      .shell.is-collapsed .sidebar-body {
+        display: none;
+      }
+
+      .shell.is-collapsed .sidebar-toggle {
+        justify-content: space-between;
+        padding: var(--space-2) var(--space-3);
       }
 
       .nav {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding-bottom: var(--space-3);
       }
 
       main {
-        padding: 28px 24px 70px;
+        padding: var(--space-5) var(--space-5) var(--space-7);
         max-width: none;
       }
 
@@ -975,22 +1151,36 @@
 
     @media (max-width: 760px) {
       body {
-        font-size: 15px;
+        font-size: var(--text-md);
       }
 
       main {
-        padding: 22px 16px 56px;
+        padding: var(--space-4) var(--space-4) var(--space-7);
       }
 
       h1 {
-        font-size: 32px;
+        font-size: 2rem;
       }
 
       h2 {
-        font-size: 24px;
+        font-size: 1.375rem;
       }
 
       .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .doc-intro {
+        padding-top: var(--space-3);
+        padding-bottom: var(--space-5);
+      }
+
+      section {
+        padding: var(--space-6) 0;
+        gap: var(--space-3);
+      }
+
+      .choice-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1050,28 +1240,34 @@
   </style>
 </head>
 <body>
-  <div class="shell">
-    <aside class="sidebar">
+  <div class="shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-controls="sidebarBody" aria-expanded="true">
+        <span class="toggle-label">收起目录</span>
+        <span class="toggle-icon" aria-hidden="true">‹</span>
+      </button>
       <div class="brand">
         <div class="brand-label">交互设计能力判别图</div>
         <h2 class="brand-title">从零散优化到可复盘能力</h2>
         <p class="brand-text">先判断用户卡在哪里，再把具体改动翻译成底层设计能力。</p>
       </div>
 
-      <nav class="nav" id="nav" aria-label="页面目录">
-        <a href="#problem"><span class="meta">01</span><span>我的真实问题</span></a>
-        <a href="#stuck"><span class="meta">02</span><span>先问用户卡在哪里</span></a>
-        <a href="#abilities"><span class="meta">03</span><span>六类底层设计能力</span></a>
-        <a href="#boundaries"><span class="meta">04</span><span>易混概念边界</span></a>
-        <a href="#translator"><span class="meta">05</span><span>复盘表达生成器</span></a>
-        <a href="#diagnoser"><span class="meta">06</span><span>可交互判别器</span></a>
-        <a href="#review"><span class="meta">07</span><span>项目复盘表达</span></a>
-        <a href="#usage"><span class="meta">08</span><span>使用方法</span></a>
-        <a href="#product"><span class="meta">09</span><span>产品化方向</span></a>
-      </nav>
+      <div class="sidebar-body" id="sidebarBody">
+        <nav class="nav" id="nav" aria-label="页面目录">
+          <a href="#problem" title="我的真实问题"><span class="meta">01</span><span class="nav-text">我的真实问题</span></a>
+          <a href="#stuck" title="先问用户卡在哪里"><span class="meta">02</span><span class="nav-text">先问用户卡在哪里</span></a>
+          <a href="#abilities" title="六类底层设计能力"><span class="meta">03</span><span class="nav-text">六类底层设计能力</span></a>
+          <a href="#boundaries" title="易混概念边界"><span class="meta">04</span><span class="nav-text">易混概念边界</span></a>
+          <a href="#translator" title="复盘表达生成器"><span class="meta">05</span><span class="nav-text">复盘表达生成器</span></a>
+          <a href="#diagnoser" title="可交互判别器"><span class="meta">06</span><span class="nav-text">可交互判别器</span></a>
+          <a href="#review" title="项目复盘表达"><span class="meta">07</span><span class="nav-text">项目复盘表达</span></a>
+          <a href="#usage" title="使用方法"><span class="meta">08</span><span class="nav-text">使用方法</span></a>
+          <a href="#product" title="产品化方向"><span class="meta">09</span><span class="nav-text">产品化方向</span></a>
+        </nav>
 
-      <div class="sidebar-note">
-        使用顺序：看到一个具体体验问题，先找“用户卡点”，再看它属于哪类能力，最后组织成项目表达。
+        <div class="sidebar-note">
+          使用顺序：看到一个具体体验问题，先找“用户卡点”，再看它属于哪类能力，最后组织成项目表达。
+        </div>
       </div>
     </aside>
 
@@ -2037,10 +2233,54 @@
 
     renderTranslator();
 
+    const shell = document.getElementById("appShell");
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebarToggleLabel = sidebarToggle.querySelector(".toggle-label");
+    const compactNavQuery = window.matchMedia("(max-width: 1020px)");
+
+    function readSavedSidebarState() {
+      try {
+        return window.localStorage.getItem("sidebarCollapsed");
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function saveSidebarState(isCollapsed) {
+      try {
+        window.localStorage.setItem("sidebarCollapsed", String(isCollapsed));
+      } catch (error) {
+        // Local files or strict browser settings may block localStorage. The UI still works for this session.
+      }
+    }
+
+    function setSidebarCollapsed(isCollapsed, shouldPersist = true) {
+      shell.classList.toggle("is-collapsed", isCollapsed);
+      sidebarToggle.setAttribute("aria-expanded", String(!isCollapsed));
+      sidebarToggleLabel.textContent = isCollapsed ? "展开目录" : "收起目录";
+      if (shouldPersist) saveSidebarState(isCollapsed);
+    }
+
+    const savedSidebarState = readSavedSidebarState();
+    setSidebarCollapsed(
+      savedSidebarState === null ? compactNavQuery.matches : savedSidebarState === "true",
+      false
+    );
+
+    sidebarToggle.addEventListener("click", () => {
+      setSidebarCollapsed(!shell.classList.contains("is-collapsed"));
+    });
+
     const navLinks = Array.from(document.querySelectorAll(".nav a"));
     const sections = navLinks
       .map((link) => document.querySelector(link.getAttribute("href")))
       .filter(Boolean);
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (compactNavQuery.matches) setSidebarCollapsed(true);
+      });
+    });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
