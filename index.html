@@ -1635,22 +1635,72 @@
     }
 
     .doc-intro {
-      padding: 34px 0 42px;
+      padding: 46px 0 54px;
       border-bottom: 0;
     }
 
     .doc-intro-grid {
-      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .82fr);
-      gap: 42px;
-      align-items: start;
-      max-width: 1040px;
+      position: relative;
+      grid-template-columns: minmax(0, .96fr) minmax(390px, .86fr);
+      gap: 56px;
+      align-items: center;
+      max-width: 1080px;
+      min-height: 360px;
+    }
+
+    .doc-intro-grid::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(35,79,50,.34), rgba(199,206,191,.72) 44%, transparent 86%);
+      pointer-events: none;
+    }
+
+    .doc-intro-grid::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(35,79,50,.08);
+      pointer-events: none;
+    }
+
+    .intro-copy {
+      position: relative;
+      padding-top: 54px;
+    }
+
+    .intro-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .intro-kicker::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
     }
 
     h1 {
-      max-width: 620px;
-      font-size: clamp(3rem, 4.35vw, 4.75rem);
-      line-height: .98;
-      letter-spacing: -.058em;
+      max-width: 610px;
+      font-size: clamp(3.25rem, 4.6vw, 5.15rem);
+      line-height: .94;
+      letter-spacing: -.064em;
       font-weight: 820;
     }
 
@@ -1668,6 +1718,7 @@
     }
 
     .intro-panel {
+      position: relative;
       max-width: none;
       margin-top: 0;
       border: 1px solid rgba(199, 206, 191, .78);
@@ -1675,6 +1726,17 @@
       background: rgba(255, 255, 255, .68);
       box-shadow: 0 16px 42px rgba(40, 54, 35, .06);
       overflow: hidden;
+      transform: translateY(10px);
+    }
+
+    .intro-panel::before {
+      content: "";
+      position: absolute;
+      top: 21px;
+      left: -42px;
+      width: 42px;
+      height: 1px;
+      background: rgba(35,79,50,.32);
     }
 
     .intro-panel-top {
@@ -1685,7 +1747,7 @@
     }
 
     .intro-panel-label {
-      color: var(--faint);
+      color: var(--accent);
       font-family: var(--mono);
       font-size: 11px;
       font-weight: 760;
@@ -1756,6 +1818,59 @@
       font-weight: 760;
       letter-spacing: 0;
       text-transform: none;
+    }
+
+    .intro-marker-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 26px;
+      max-width: 430px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 720;
+      letter-spacing: .03em;
+    }
+
+    .intro-marker-row span {
+      position: relative;
+      padding-top: 15px;
+      text-align: center;
+    }
+
+    .intro-marker-row span:first-child {
+      text-align: left;
+    }
+
+    .intro-marker-row span:last-child {
+      text-align: right;
+    }
+
+    .intro-marker-row span::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--line-strong);
+      transform: translateX(-50%);
+    }
+
+    .intro-marker-row span::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .intro-marker-row span:last-child::after {
+      display: none;
     }
 
     .guide-strip strong {
@@ -2330,10 +2445,20 @@
         gap: 20px;
         align-items: start;
         max-width: none;
+        min-height: 0;
+      }
+
+      .intro-copy {
+        padding-top: 42px;
       }
 
       .intro-panel {
         max-width: 720px;
+        transform: none;
+      }
+
+      .intro-panel::before {
+        display: none;
       }
 
       .diagnoser,
@@ -2350,6 +2475,23 @@
       h1 {
         font-size: 3rem;
         line-height: .94;
+      }
+
+      .doc-intro-grid::before,
+      .doc-intro-grid::after {
+        display: none;
+      }
+
+      .intro-copy {
+        padding-top: 0;
+      }
+
+      .intro-kicker {
+        margin-bottom: 12px;
+      }
+
+      .intro-marker-row {
+        display: none;
       }
 
       .intro-panel {
@@ -2485,11 +2627,15 @@
     <main>
       <header class="doc-intro">
         <div class="doc-intro-grid">
-          <div>
+          <div class="intro-copy">
+            <div class="intro-kicker">能力翻译工作台</div>
             <h1>把“小优化”翻译成设计能力。</h1>
             <p class="intro-text">
               <strong>先定位用户卡点，</strong>再把具体改动归类成可复盘、可表达的能力证据。
             </p>
+            <div class="intro-marker-row" aria-hidden="true">
+              <span>现象</span><span>卡点</span><span>能力</span><span>动作</span><span>表达</span>
+            </div>
           </div>
           <div class="intro-panel">
             <div class="intro-panel-top">
