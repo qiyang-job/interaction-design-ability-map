@@ -1635,25 +1635,28 @@
     }
 
     .doc-intro {
-      padding: 40px 0 34px;
+      padding: 34px 0 42px;
       border-bottom: 0;
     }
 
     .doc-intro-grid {
-      grid-template-columns: minmax(0, 980px);
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .82fr);
+      gap: 42px;
+      align-items: start;
+      max-width: 1040px;
     }
 
     h1 {
-      max-width: 980px;
-      font-size: clamp(3rem, 5.1vw, 5.35rem);
-      line-height: .96;
-      letter-spacing: -.062em;
+      max-width: 620px;
+      font-size: clamp(3rem, 4.35vw, 4.75rem);
+      line-height: .98;
+      letter-spacing: -.058em;
       font-weight: 820;
     }
 
     .intro-text {
-      max-width: 58ch;
-      margin: 0;
+      max-width: 43ch;
+      margin: 18px 0 0;
       color: var(--muted);
       font-size: 15px;
       line-height: 1.62;
@@ -1665,10 +1668,10 @@
     }
 
     .intro-panel {
-      max-width: 940px;
-      margin-top: 24px;
+      max-width: none;
+      margin-top: 0;
       border: 1px solid rgba(199, 206, 191, .78);
-      border-radius: 22px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, .68);
       box-shadow: 0 16px 42px rgba(40, 54, 35, .06);
       overflow: hidden;
@@ -1676,22 +1679,36 @@
 
     .intro-panel-top {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 20px;
-      align-items: center;
-      padding: 18px 20px;
+      gap: 10px;
+      padding: 16px;
       border-bottom: 1px solid var(--line);
     }
 
+    .intro-panel-label {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 760;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
     .intro-chain {
-      width: fit-content;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
       margin: 0;
-      padding: 7px 10px;
+      padding: 0;
       border-radius: 999px;
-      background: #f3f7f1;
-      border: 1px solid var(--line);
+      background: transparent;
+      border: 0;
       box-shadow: none;
-      white-space: nowrap;
+      white-space: normal;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .intro-chain strong {
@@ -1701,7 +1718,7 @@
 
     .guide-strip {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 0;
       margin-top: 0;
     }
@@ -1709,18 +1726,19 @@
     .guide-strip > div {
       min-height: 0;
       display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
+      grid-template-columns: 32px minmax(0, 1fr);
       column-gap: 12px;
       row-gap: 4px;
       align-items: start;
-      padding: 17px 20px 19px;
-      border-left: 1px solid var(--line);
+      padding: 14px 16px 15px;
+      border-top: 1px solid var(--line);
+      border-left: 0;
       background: rgba(255, 255, 255, .36);
       box-shadow: none;
     }
 
     .guide-strip > div:first-child {
-      border-left: 0;
+      border-top: 0;
     }
 
     .guide-strip span {
@@ -2307,6 +2325,17 @@
         max-width: none;
       }
 
+      .doc-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        align-items: start;
+        max-width: none;
+      }
+
+      .intro-panel {
+        max-width: 720px;
+      }
+
       .diagnoser,
       .translator {
         grid-template-columns: 1fr;
@@ -2324,7 +2353,7 @@
       }
 
       .intro-panel {
-        margin-top: 18px;
+        margin-top: 0;
         border-radius: 18px;
       }
 
@@ -2458,20 +2487,21 @@
         <div class="doc-intro-grid">
           <div>
             <h1>把“小优化”翻译成设计能力。</h1>
-            <div class="intro-panel">
-              <div class="intro-panel-top">
-                <p class="intro-text">
-                  <strong>先定位用户卡点，</strong>再把具体改动归类成可复盘、可表达的能力证据。
-                </p>
-                <div class="intro-chain" aria-label="诊断顺序">
-                  <strong>现象</strong><span>→</span><strong>卡点</strong><span>→</span><strong>能力</strong><span>→</span><strong>动作</strong><span>→</span><strong>表达</strong>
-                </div>
+            <p class="intro-text">
+              <strong>先定位用户卡点，</strong>再把具体改动归类成可复盘、可表达的能力证据。
+            </p>
+          </div>
+          <div class="intro-panel">
+            <div class="intro-panel-top">
+              <div class="intro-panel-label">判断链路</div>
+              <div class="intro-chain" aria-label="诊断顺序">
+                <strong>现象</strong><span>→</span><strong>卡点</strong><span>→</span><strong>能力</strong><span>→</span><strong>动作</strong><span>→</span><strong>表达</strong>
               </div>
-              <div class="guide-strip" aria-label="阅读路径">
-                <div><span>01</span><strong>定位卡点</strong><p>路径、理解、扫读、操作、反馈、规则。</p></div>
-                <div><span>02</span><strong>归类能力</strong><p>落到 6 类底层交互设计能力。</p></div>
-                <div><span>03</span><strong>生成表达</strong><p>转成周报、作品集、项目复盘话术。</p></div>
-              </div>
+            </div>
+            <div class="guide-strip" aria-label="阅读路径">
+              <div><span>01</span><strong>定位卡点</strong><p>路径、理解、扫读、操作、反馈、规则。</p></div>
+              <div><span>02</span><strong>归类能力</strong><p>落到 6 类底层交互设计能力。</p></div>
+              <div><span>03</span><strong>生成表达</strong><p>转成周报、作品集、项目复盘话术。</p></div>
             </div>
           </div>
         </div>
