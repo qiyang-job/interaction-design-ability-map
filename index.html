@@ -99,23 +99,22 @@
 
     .sidebar-toggle {
       appearance: none;
+      width: 32px;
       min-height: 28px;
-      display: inline-flex;
+      display: inline-grid;
       align-items: center;
       justify-content: center;
-      flex: 0 0 auto;
+      place-items: center;
+      flex: 0 0 32px;
       margin: 0;
-      padding: 0 8px;
+      padding: 0;
       border: 1px solid transparent;
       border-radius: var(--radius);
       background: transparent;
       color: var(--ink-2);
       cursor: pointer;
       font: inherit;
-      font-size: var(--text-sm);
-      font-weight: 720;
       line-height: 1;
-      white-space: nowrap;
     }
 
     .sidebar-toggle:hover {
@@ -126,13 +125,36 @@
 
     .shell.is-collapsed .sidebar-toggle {
       justify-content: center;
+      width: 36px;
       min-height: 36px;
       border-color: var(--line);
       background: var(--paper-2);
     }
 
-    .toggle-label {
-      display: inline-block;
+    .toggle-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+    }
+
+    .toggle-icon svg,
+    .toggle-icon .button-icon {
+      width: 18px;
+      height: 18px;
+      stroke-width: 1.8;
+    }
+
+    .toggle-icon-open {
+      display: none;
+    }
+
+    .shell.is-collapsed .toggle-icon-close {
+      display: none;
+    }
+
+    .shell.is-collapsed .toggle-icon-open {
+      display: inline-grid;
     }
 
     .brand {
@@ -1301,7 +1323,7 @@
       }
 
       .sidebar-toggle {
-        width: auto;
+        width: 32px;
         min-width: 0;
         margin-bottom: 0;
       }
@@ -1341,12 +1363,12 @@
       }
 
       .shell.is-collapsed .sidebar-toggle {
-        width: auto;
+        width: 32px;
         min-height: 28px;
         border-color: transparent;
         background: transparent;
         justify-content: center;
-        padding: 0 8px;
+        padding: 0;
       }
 
       .nav {
@@ -2434,7 +2456,8 @@
       <div class="brand">
         <div class="brand-label"><span class="brand-label-text">交互设计能力判别图</span></div>
         <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-controls="sidebarBody" aria-expanded="true" aria-label="收起目录" title="收起目录">
-          <span class="toggle-label">收起目录</span>
+          <span class="toggle-icon toggle-icon-close" aria-hidden="true"><i data-lucide="panel-left-close" class="button-icon"></i></span>
+          <span class="toggle-icon toggle-icon-open" aria-hidden="true"><i data-lucide="panel-left-open" class="button-icon"></i></span>
         </button>
       </div>
 
@@ -3463,7 +3486,6 @@
 
     const shell = document.getElementById("appShell");
     const sidebarToggle = document.getElementById("sidebarToggle");
-    const sidebarToggleLabel = sidebarToggle.querySelector(".toggle-label");
     const compactNavQuery = window.matchMedia("(max-width: 1020px)");
 
     function readSavedSidebarState() {
@@ -3486,7 +3508,6 @@
       shell.classList.toggle("is-collapsed", isCollapsed);
       sidebarToggle.setAttribute("aria-expanded", String(!isCollapsed));
       const toggleText = isCollapsed ? "展开目录" : "收起目录";
-      sidebarToggleLabel.textContent = isCollapsed ? "展开" : toggleText;
       sidebarToggle.setAttribute("aria-label", toggleText);
       sidebarToggle.setAttribute("title", toggleText);
       if (shouldPersist) saveSidebarState(isCollapsed);
