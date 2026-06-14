@@ -221,7 +221,6 @@
     .nav-icon,
     .title-icon,
     .button-icon,
-    .section-title-icon,
     .field-icon,
     .scenario-icon {
       width: 16px;
@@ -392,16 +391,7 @@
     }
 
     .section-title {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-2);
-    }
-
-    .section-title-icon {
-      width: 17px;
-      height: 17px;
-      margin-top: 4px;
-      color: var(--ink);
+      display: inline;
     }
 
     .lead {
@@ -1788,20 +1778,6 @@
       font-weight: 800;
     }
 
-    .section-title {
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title-icon {
-      width: 20px;
-      height: 20px;
-      padding: 3px;
-      border-radius: 7px;
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
     .lead {
       max-width: 72ch;
       margin: 8px 0 18px;
@@ -2504,7 +2480,7 @@
       <section id="problem">
         <div class="section-no">01</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="clipboard" class="section-title-icon" aria-hidden="true"></i>真实问题：缺少判别系统。</span></h2>
+          <h2><span class="section-title">真实问题：缺少判别系统。</span></h2>
           <p class="lead">难点不是不会优化，而是复盘时很难把细节动作归纳成稳定能力。</p>
           <div class="row-list">
             <div class="row-item">
@@ -2530,7 +2506,7 @@
       <section id="stuck">
         <div class="section-no">02</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="map" class="section-title-icon" aria-hidden="true"></i>先问用户卡在哪里。</span></h2>
+          <h2><span class="section-title">先问用户卡在哪里。</span></h2>
           <p class="lead">把“页面哪里不对”换成“用户在哪一步受阻”，能力分类就会更稳定。</p>
           <div class="stuck-map">
             <div class="stuck-row header">
@@ -2582,7 +2558,7 @@
       <section id="abilities">
         <div class="section-no">03</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="layers" class="section-title-icon" aria-hidden="true"></i>六类底层设计能力。</span></h2>
+          <h2><span class="section-title">六类底层设计能力。</span></h2>
           <p class="lead">先记一句人话，再看专业定义、表现、动作和复盘表达。</p>
 
           <div class="ability-stack">
@@ -2766,7 +2742,7 @@
       <section id="boundaries">
         <div class="section-no">04</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="git-branch" class="section-title-icon" aria-hidden="true"></i>易混概念边界。</span></h2>
+          <h2><span class="section-title">易混概念边界。</span></h2>
           <p class="lead">真实项目常是跨层问题。先分清主问题，再表达辅助能力。</p>
 
           <div class="boundary-list">
@@ -2845,7 +2821,7 @@
       <section id="translator">
         <div class="section-no">05</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="wand" class="section-title-icon" aria-hidden="true"></i>复盘表达生成器。</span></h2>
+          <h2><span class="section-title">复盘表达生成器。</span></h2>
           <p class="lead">输入真实优化，选择用户卡点，生成一条可放进周报、总结或作品集的表达。</p>
 
           <div class="translator">
@@ -2919,7 +2895,7 @@
       <section id="diagnoser">
         <div class="section-no">06</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="search" class="section-title-icon" aria-hidden="true"></i>可交互判别器。</span></h2>
+          <h2><span class="section-title">可交互判别器。</span></h2>
           <p class="lead">点一个常见现象，直接得到一条完整诊断链路。</p>
 
           <div class="diagnoser">
@@ -2964,7 +2940,7 @@
       <section id="review">
         <div class="section-no">07</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="file-text" class="section-title-icon" aria-hidden="true"></i>项目复盘表达。</span></h2>
+          <h2><span class="section-title">项目复盘表达。</span></h2>
           <p class="lead">不要只说改了什么，要说用户卡点、设计判断和降低的成本。</p>
 
           <div class="translation-table">
@@ -3025,7 +3001,7 @@
       <section id="usage">
         <div class="section-no">08</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="list-check" class="section-title-icon" aria-hidden="true"></i>使用方法。</span></h2>
+          <h2><span class="section-title">使用方法。</span></h2>
           <p class="lead">工作当下和项目复盘，都用同一条判断链。</p>
 
           <div class="usage-grid">
@@ -3058,7 +3034,7 @@
       <section id="product">
         <div class="section-no">09</div>
         <div class="section-body">
-          <h2><span class="section-title"><i data-lucide="boxes" class="section-title-icon" aria-hidden="true"></i>产品化方向。</span></h2>
+          <h2><span class="section-title">产品化方向。</span></h2>
           <p class="lead">它不该变成百科，更适合收敛成“案例沉淀 + 能力证据”的复盘工作台。</p>
 
           <div class="product-grid">
